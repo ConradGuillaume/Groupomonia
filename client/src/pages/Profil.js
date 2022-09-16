@@ -6,7 +6,7 @@ const Profil = () => {
   return (
     <div className="profil-page">
       {uid ? (
-        <h1>UPDATE PAGE</h1>
+        <h1>JE SUIS CONNECTE YOUPIH ET JAI UN GROS JETON </h1>
       ) : (
         <div className="log-container">
           <Log signin={false} signup={true} />

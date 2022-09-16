@@ -19,7 +19,7 @@ const SignInForm = () => {
     })
       .then((res) => {
         console.log(res);
-        if (res) window.location = "/";
+        if (res) window.location = "/profil";
       })
       .catch((err) => {
         console.log(err);

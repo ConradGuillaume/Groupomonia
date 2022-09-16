@@ -15,9 +15,9 @@ $font-1: "font-1", sans-serif;
 $font-2: "font-2", serif;
 $font-3: "font-3", serif;
 
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
-$color-3: rgb(0, 22, 44);
+$color-1: #fd2d01;
+$color-2: #ffd7d7;
+$color-3: #4e5166;
 $color-4: #fdeeee;
 $black: rgb(40, 40, 40);
 $white: rgb(253, 253, 253);
@@ -94,6 +94,7 @@ body {
   font-weight: bold;
 }
 .success {
+  margin-top: 5px;
   color: green;
   font-weight: bold;
 }
