@@ -2,7 +2,8 @@ const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
-module.exports.readPost = (req, res) => {
+module.exports.readPosts = (req, res) => {
+  ////////////////////////////////////////////////////////////////////// à revoir /////
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("err to get data", err);
@@ -15,12 +16,16 @@ module.exports.createPost = async (req, res) => {
     video: req.body.video,
     likers: [],
     Comments: [],
+    picture:
+      req.file != null
+        ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        : "",
   });
   try {
     const post = await newPost.save();
     return res.status(201).json(post);
   } catch (err) {
-    return res.status(400).send(err);
+    return res.status(400).send(err); //////////  à  vérifier send ///////////////////////////////////////
   }
 };
 

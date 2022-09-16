@@ -42,14 +42,12 @@ exports.signIn = (req, res) => {
             }
           })
           .catch((err) => {
-            const errors = signInErrors(err);
-            res.status(200).json({ errors });
+            res.status(400).json({ err });
           });
       }
     })
     .catch((err) => {
-      const errors = signInErrors(err);
-      res.status(200).json({ errors });
+      res.status(400).json({ err });
     });
 };
 

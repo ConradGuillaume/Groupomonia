@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
+const fs = require("fs");
 
 module.exports.getAllUsers = async (req, res) => {
   const users = await UserModel.find().select("-password");
@@ -17,38 +18,42 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 module.exports.updateUser = async (req, res) => {
+  ////////////////////////////////////////////////////////////////////////////////////////////////////// gerer les images !!!!!!!
+
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
-  try {
-    await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          bio: req.body.bio,
-        },
-      },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        if (err) return res.status(500).send({ message: err });
+  const userObject = req.file
+    ? {
+        profilePicture: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
       }
-    );
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
+    : { ...req.body };
+  UserModel.updateOne(
+    { _id: req.params.id },
+    { ...userObject, _id: req.params.id }
+  )
+    .then(() => res.status(200).json({ message: "User updated" }))
+    .catch((error) => res.status(400).json({ error }));
 };
 
-module.exports.deleteUser = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-  try {
-    await UserModel.deleteOne({ _id: req.params.id }).exec();
-    res.status(200).json({ message: "User Deleted." });
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
+module.exports.deleteUser = (req, res) => {
+  UserModel.findOne({ _id: req.params.id }).then((user) => {
+    const filename = user.picture.split("/images")[1];
+    fs.unlink(`images/${filename}`, () => {
+      UserModel.deleteOne({ _id: req.params.id })
+        .then(() => {
+          res
+            .status(200)
+            .json({ message: "User and user's data has been delete" });
+        })
+        .catch((error) => res.status(400).json({ error }));
+    });
+    // }
+    if (!user) {
+      res.status(404).json({ message: "No user to delete" });
+    }
+  });
 };
 
 module.exports.follow = (req, res) => {
@@ -65,17 +70,17 @@ module.exports.follow = (req, res) => {
       { $addToSet: { following: req.body.idToFollow } },
       { new: true, upsert: true },
       (err, docs) => {
-        if (!err) res.status(201).json(docs);
+        if (!err) res.status(200).json(docs);
         else return res.status(400).json(err);
       }
     );
-    // add to following list
+    // add to following list//////////////////////////////////////////////////////////////////////////à Revoir
     UserModel.findByIdAndUpdate(
       req.body.idToFollow,
       { $addToSet: { followers: req.params.id } },
       { new: true, upsert: true },
       (err, docs) => {
-        //if (!err) res.status(201).json(docs);
+        // if (!err) res.status(201).json(docs);
         if (err) return res.status(400).json(err);
       }
     );
