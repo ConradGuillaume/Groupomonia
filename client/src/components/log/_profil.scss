@@ -1,128 +1,87 @@
-.profil-page {
-  margin: 80px auto 0;
-  max-width: 1200px;
+.connection-form {
+  display: flex;
+  justify-content: center;
 
-  .icons {
-    top: 55px;
-  }
+  padding: 20px 0px 20px 0px;
+  .form-container {
+    background: $color-1;
+    border-radius: 15px;
+    padding: 8px 80px 8px 80px;
+    box-shadow: 1px 1px 7px 4px $color-2;
 
-  .log-container {
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 60% 40%;
+    ul {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 0px 20px 0px;
 
-    @media screen and(max-width: 885px) {
-      grid-template-columns: 1fr;
-    }
-  }
+      background: $color-1;
+      li {
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px;
+        width: 130px;
+        font-weight: 600;
+        text-align: center;
+        background: $color-3;
+        box-shadow: 1px 2px 4px 1px black;
 
-  .connection-form {
-    border: none;
-    background: rgba(128, 128, 128, 0.521);
-    min-width: 490px;
-    width: 90%;
-    text-align: center;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 20px;
-
-    @media screen and(max-width: 550px) {
-      min-width: 200px;
-    }
-
-    .form-container {
-      display: grid;
-      grid-template-columns: 30% 70%;
-
-      @media screen and(max-width: 550px) {
-        grid-template-columns: 1fr;
-      }
-
-      ul {
-        li {
-          cursor: pointer;
-          border-radius: 20px;
-          padding: 10px 20px;
-          transition: 0.2s;
-          &:hover {
-            background-color: grey;
-          }
-
-          @media screen and(max-width: 550px) {
-            width: 80%;
-            margin: 0 auto;
-          }
-        }
-        .active-btn {
-          background: $color-1;
-
-          &:hover {
-            background: $color-2;
-          }
-        }
-        li:not(.active-btn) {
-          &:hover {
-            transform: translateX(3px);
-          }
-        }
-        #login {
-          position: relative;
-          @media screen and(max-width: 550px) {
-            margin-bottom: 30px;
-
-            &:after {
-              content: "";
-              position: absolute;
-              bottom: -10px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: 80%;
-              height: 1px;
-              background: $color-2;
-            }
-          }
-        }
-      }
-      form {
-        input {
-          padding: 14px 20px;
-          margin: 0;
-          font-size: 1.2rem;
-          font-family: $font-2;
-          border-radius: 20px;
-
-          &:focus {
-            box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
-          }
-        }
-        a {
-          color: rgb(62, 62, 214);
+        &:hover {
+          transition: 0.8s;
+          transform: translateX(-3px);
+          color: white;
+          background: $color-2;
         }
       }
     }
-  }
-  h1 {
-    text-align: center;
-    margin: 10px 0 6px;
-  }
-  .img-container {
-    display: grid;
-    align-items: center;
-    height: 100%;
-
-    img {
-      height: 280px;
+    #sign-up-form {
+      padding: 20px;
+      label {
+        display: flex;
+        justify-content: center;
+        font-weight: 600;
+        background: $color-1;
+        color: $color-2;
+        padding: 9px 0;
+        z-index: 10;
+        cursor: pointer;
+      }
+    }
+    input {
+      padding: 14px 20px;
+      margin: 0;
+      font-size: 1.2rem;
+      font-family: $font-2;
+      width: 300px;
       border-radius: 20px;
-
-      @media screen and(max-width: 1050px) {
-        height: 220px;
-      }
-      @media screen and(max-width: 950px) {
-        height: 200px;
-      }
-      @media screen and(max-width: 885px) {
-        display: none;
+      box-shadow: 1px 3px 2px 1px $color-2;
+      &:focus {
+        border: 2px inset $color-3;
+        box-shadow: none;
       }
     }
+  }
+  input[type="submit"] {
+    margin-top: 25px;
+
+    &:focus {
+      border: none;
+    }
+  }
+  .error {
+    margin-top: 15px;
+    width: 300px;
+  }
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    border: 5px inset $color-1;
+    height: 180px;
+    z-index: 15;
+    border-radius: 100px;
+    background: $color-2;
+    justify-content: center;
   }
 }

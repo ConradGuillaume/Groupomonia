@@ -8,11 +8,14 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
+  const [errorMail, setErrorMail] = useState("");
+  const [errorPseudo, setErrorPseudo] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
 
   const register = async (e) => {
     e.preventDefault();
-    const pseudoError = document.querySelector(".pseudo.error");
-    const emailError = document.querySelector(".email.error");
+    //const pseudoError = document.querySelector(".pseudo.error");
+    //const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
     const passwordConfirmError = document.querySelector(
       ".password-confirm.error"
@@ -35,10 +38,20 @@ const SignUpForm = () => {
           setSubmitForm(true);
         })
         .catch((err) => {
+          setErrorMail("");
+          setErrorPassword("");
+          setErrorPseudo("");
           console.log(err.response.data.errors);
-          pseudoError.innerHTML = err.response.data.errors.pseudo;
-          emailError.innerHTML = err.response.data.errors.email;
-          passwordError.innerHTML = err.response.data.errors.password;
+
+          if (err.response.data.errors.email) {
+            setErrorMail(err.response.data.errors.email);
+          }
+          if (err.response.data.errors.pseudo) {
+            setErrorPseudo(err.response.data.errors.pseudo);
+          }
+          if (err.response.data.errors.password) {
+            setErrorPassword(err.response.data.errors.password);
+          }
         });
     }
   };
@@ -64,7 +77,7 @@ const SignUpForm = () => {
             onChange={(e) => setPseudo(e.target.value)}
             value={pseudo}
           />
-          <div className="pseudo error"></div>
+          <div className="pseudo error">{errorPseudo}</div>
           <br />
           <label htmlFor="email">Adresse Email</label>
           <br />
@@ -75,7 +88,7 @@ const SignUpForm = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
-          <div className="email error"></div>
+          <div className="email error">{errorMail}</div>
           <br />
           <label htmlFor="password">Mot de passe</label>
           <br />
@@ -86,7 +99,7 @@ const SignUpForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <div className="password error"></div>
+          <div className="password error">{errorPassword}</div>
           <br />
           <label htmlFor="password-conf">Confirmer mot de passe</label>
           <br />
@@ -97,7 +110,7 @@ const SignUpForm = () => {
             onChange={(e) => setControlPassword(e.target.value)}
             value={controlPassword}
           />
-          <div className="password-confirm error"></div>
+          <div className="password-confirm error">{errorPassword}</div>
           <br />
           <input type="submit" value={"Valider inscription"} />
         </form>
