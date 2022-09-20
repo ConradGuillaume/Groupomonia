@@ -33,7 +33,7 @@ exports.signIn = (req, res) => {
           .then((valid) => {
             if (!valid) {
               res.status(401).json({
-                message: "paire identifiant/mot de passe incorrecte",
+                message: "mot de passe incorrecte",
               });
             } else {
               const token = createToken(user._id);

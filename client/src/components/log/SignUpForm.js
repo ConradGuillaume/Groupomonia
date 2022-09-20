@@ -11,18 +11,13 @@ const SignUpForm = () => {
   const [errorMail, setErrorMail] = useState("");
   const [errorPseudo, setErrorPseudo] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [passwordConfirmError, setPasswordConfirmError] = useState("");
 
   const register = async (e) => {
     e.preventDefault();
-    //const pseudoError = document.querySelector(".pseudo.error");
-    //const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
-    const passwordConfirmError = document.querySelector(
-      ".password-confirm.error"
-    );
+    setPasswordConfirmError("");
     if (password != controlPassword) {
-      passwordConfirmError.innerHTML =
-        "Les mots de passe ne correspondent pas ";
+      setPasswordConfirmError("les mots de passe ne correspondent pas ");
     } else {
       await axios({
         method: "post",
@@ -110,7 +105,7 @@ const SignUpForm = () => {
             onChange={(e) => setControlPassword(e.target.value)}
             value={controlPassword}
           />
-          <div className="password-confirm error">{errorPassword}</div>
+          <div className="password-confirm error">{passwordConfirmError}</div>
           <br />
           <input type="submit" value={"Valider inscription"} />
         </form>

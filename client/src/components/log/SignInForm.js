@@ -4,9 +4,9 @@ import axios from "axios";
 const SignInForm = () => {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
+  const [emailError, SetEmailError] = useState("");
+  const [passwordError, SetPasswordError] = useState("");
   const handleLogin = (e) => {
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
     e.preventDefault();
     axios({
       method: "post",
@@ -22,12 +22,17 @@ const SignInForm = () => {
         if (res) window.location = "/profil";
       })
       .catch((err) => {
+        SetEmailError();
+        SetPasswordError();
         console.log(err);
         console.log(err.response.status);
         if (err.response.status === 404) {
-          emailError.innerHTML = err.response.data.message;
-        } else if (err.response.status === 401) {
-          passwordError.innerHTML = err.response.data.message;
+          SetEmailError(err.response.data.message);
+        } else {
+          SetEmailError("");
+        }
+        if (err.response.status === 401) {
+          SetPasswordError(err.response.data.message);
         }
       });
   };
@@ -42,7 +47,7 @@ const SignInForm = () => {
         onChange={(e) => SetEmail(e.target.value)}
         value={email}
       />
-      <div className="email error"></div>
+      <div className="email error">{emailError}</div>
       <br />
       <label htmlFor="password">Mot de passe</label>
 
@@ -53,7 +58,7 @@ const SignInForm = () => {
         onChange={(e) => SetPassword(e.target.value)}
         value={password}
       />
-      <div className="password error"></div>
+      <div className="password error">{passwordError}</div>
       <br />
       <input type="submit" value={"Se connecter"} />
     </form>
