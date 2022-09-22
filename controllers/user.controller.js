@@ -24,11 +24,12 @@ module.exports.updateUser = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
   const userObject = req.file
     ? {
-        profilePicture: `${req.protocol}://${req.get("host")}/images/${
+        picture: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
+  console.log(userObject);
   UserModel.updateOne(
     { _id: req.params.id },
     { ...userObject, _id: req.params.id }
@@ -57,6 +58,8 @@ module.exports.deleteUser = (req, res) => {
 };
 
 module.exports.follow = (req, res) => {
+  console.log("ID TO FOLLOW", req.body.idToFollow);
+  console.log("PARAMS ID", req.params.id);
   if (
     !ObjectId.isValid(req.params.id) ||
     !ObjectId.isValid(req.body.idToFollow)
@@ -65,7 +68,7 @@ module.exports.follow = (req, res) => {
 
   try {
     //add to the follower list
-    UserModel.findOneAndUpdate(
+    UserModel.findByIdAndUpdate(
       req.params.id,
       { $addToSet: { following: req.body.idToFollow } },
       { new: true, upsert: true },

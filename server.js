@@ -8,6 +8,7 @@ require("./config/db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -30,7 +31,7 @@ app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._conditions._id);
 });
 // routes
-
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 //server

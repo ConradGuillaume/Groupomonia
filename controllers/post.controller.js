@@ -75,7 +75,7 @@ module.exports.likePost = (req, res, next) => {
       },
       { new: true },
       (err, docs) => {
-        if (!err) res.status(201).json({ message: "The sauce is liked" });
+        if (!err) res.status(201).json({ message: "user liked" });
         else return res.status(400).send(err);
       }
     );
