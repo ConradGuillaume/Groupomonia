@@ -9,8 +9,11 @@ export const getUsers = createSlice({
     setUserData: (state, action) => {
       state.getUsers = action.payload;
     },
+    editBio: (state, { payload }) => {
+      state.getUsers.bio = payload;
+    },
   },
 });
 
 export default getUsers.reducer;
-export const { setUserData } = getUsers.actions;
+export const { setUserData, editBio } = getUsers.actions;

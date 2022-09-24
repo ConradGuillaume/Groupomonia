@@ -15,7 +15,17 @@
     align-items: center;
     flex-direction: column;
     width: 50%;
-    border: 2px blue solid;
+    border-radius: 45px;
+    .profil-update {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: $color-1;
+      width: 80%;
+      padding: 5%;
+      border-radius: 45px;
+    }
   }
   #user-pic {
     height: 200px;
@@ -68,12 +78,14 @@
   display: flex;
   justify-content: center;
   width: 50%;
+
   .bio-update {
     background: $color-1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-top: 10%;
-    border: solid;
+    border-radius: 45px;
     width: 80%;
     h3 {
       display: flex;
@@ -83,37 +95,156 @@
     }
     p {
       color: $color-2;
-      background: $color-1;
+      margin: 5px;
+      background: $color-3;
     }
   }
   p,
   textarea {
     color: $color-2;
-    min-height: 80px;
+    min-height: 100px;
     border: 1px solid $color-1;
     border-radius: 20px 20px 6px 20px;
-    background: red;
+    background: wheat;
     padding: 10px 20px;
+    width: 80%;
     font-size: 1.3rem;
   }
   textarea {
-    width: 100%;
-    margin-bottom: -6px;
+    align-items: center;
     font-size: 1.3rem;
     font-weight: 600;
+    width: 80%;
   }
   button {
-    margin-top: 7%;
+    margin-top: 2%;
     width: 50%;
-    margin-left: 45%;
+    margin-left: 30%;
     justify-content: center;
   }
 
   #member {
     display: flex;
+    justify-content: center;
+    align-items: center;
     background: red($color: #000000);
-    border: solid 5px purple;
+
     height: 50px;
     width: 100%;
+  }
+}
+h5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  border-radius: 50px;
+  width: 60%;
+  cursor: pointer;
+  height: 50px;
+  margin: 5px 5px 5px 5px;
+}
+.popup-profil-container {
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: fixed;
+  animation: popup 1s forwards;
+
+  @keyframes popup {
+    to {
+      backdrop-filter: blur(2px);
+    }
+  }
+
+  .modal {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-100%);
+    background: $color-1;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(131, 130, 130, 0.356);
+    overflow: auto;
+    transform: scaleY(0);
+    transform-origin: center;
+    animation: modal 0.5s forwards;
+
+    h3 {
+      min-width: 200px;
+    }
+
+    @keyframes modal {
+      to {
+        transform: scale(1) translate(-50%);
+      }
+    }
+
+    .cross {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      transition: 0.1s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.07);
+      }
+    }
+  }
+  ul {
+    margin: 20px 0 0;
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+    &::-webkit-scrollbar-track {
+      background: $color-4;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $color-1;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    li {
+      display: grid;
+      grid-template-columns: 64px 1fr 114px;
+      align-items: center;
+      margin: 10px 0;
+
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 0 2px rgba(51, 51, 51, 0.376);
+      }
+      h4 {
+        text-align: left;
+        min-width: 210px;
+      }
+      .follow-handler {
+        text-align: left;
+
+        button {
+          background: $color-4;
+          border-radius: 20px;
+          margin-right: 6px;
+
+          &:hover {
+            color: $color-3;
+            transform: translateX(2px);
+          }
+        }
+      }
+    }
   }
 }

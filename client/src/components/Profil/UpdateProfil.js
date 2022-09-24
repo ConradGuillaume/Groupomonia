@@ -4,24 +4,36 @@ import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
 import axios from "axios";
 import dateParser from "../Utils";
-import { editBio } from "../../feature/Bio.slice";
+import { editBio } from "../../feature/user.slice";
+import { setUsers } from "../../feature/users.slice";
 
 const UpdateProfil = () => {
   const [bio, setBio] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
   const userData = useSelector((state) => state.getUsers.getUsers);
-  const bioEnd = useSelector((state) => state.editBio.bio);
+  const usersData = useSelector((state) => state.allUsers.users);
+  const [followingPopup, setFollowingPopup] = useState(false);
+  const [followersPopup, setFollowersPopup] = useState(false);
   const dispatch = useDispatch();
-
   const handleUpdate = () => {
-    axios
-      .put(`${process.env.REACT_APP_API_URL}api/user/${userData._id}`, {
-        bio: bio,
-      })
+    axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/user/` + userData._id,
+      data: { bio },
+    })
       .then((res) => dispatch(editBio(bio)))
       .catch((err) => console.log(err));
+
     setUpdateForm(false);
   };
+   axios
+    .get(`${process.env.REACT_APP_API_URL}api/user`)
+    .then((res) => dispatch(setUsers(res.data)))
+    .catch((err) => {
+      console.log(err);
+    });
+  //usersData && console.log(usersData);
+  // userData && console.log(userData.bio);
   return (
     userData && (
       <div className="profil-container">
@@ -29,9 +41,11 @@ const UpdateProfil = () => {
         <h1>profil de {userData.pseudo}</h1>
         <div className="update-container">
           <div className="left-part">
-            <h3>photo de profil</h3>
-            <img id="user-pic" src={userData.picture} alt="user-pic" />
-            <UploadImg />
+            <div className="profil-update">
+              <h3>photo de profil</h3>
+              <img id="user-pic" src={userData.picture} alt="user-pic" />
+              <UploadImg />
+            </div>
           </div>
           <div className="right-part">
             <div className="bio-update">
@@ -52,18 +66,55 @@ const UpdateProfil = () => {
                     type="text"
                     defaultValue={userData.bio}
                     onChange={(e) => setBio(e.target.value)}
-                  >
-                    {bioEnd}
-                  </textarea>
+                  ></textarea>
                   <button onClick={handleUpdate}>valider modification </button>
                 </>
               )}
               <h4 id="member">
                 Membre depuis le: {dateParser(userData.createdAt)}
               </h4>
+              <h5 onClick={() => setFollowingPopup(true)}>
+                abonnements : {userData.following && userData.following.length}
+              </h5>
+              <h5 onClick={() => setFollowersPopup(true)}>
+                Abonnés : {userData.followers && userData.followers.length}
+              </h5>
             </div>
           </div>
         </div>
+        {followingPopup && (
+          <div className="popup-profil-container">
+            <div className="modal">
+              <h3>Abonnements</h3>
+              <span className="cross" onClick={() => setFollowingPopup(false)}>
+                &#10005;
+              </span>
+              <ul>
+                {usersData.map((user) => {
+                  for (let i = 0; i < userData.following.length; i++)
+                    if (user._id === userData.following[i]) {
+                      return (
+                        <li key={user._id}>
+                          <img src={user.picture} alt="pic" />
+                          <h4>{user.pseudo}</h4>
+                        </li>
+                      );
+                    }
+                })}
+              </ul>
+            </div>
+          </div>
+        )}
+        {followersPopup && (
+          <div className="popup-profil-container">
+            <div className="modal">
+              <h3>Abonné(e)s</h3>
+              <span className="cross" onClick={() => setFollowersPopup(false)}>
+                &#10005;
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     )
   );
