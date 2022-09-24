@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
-
+  const [upFile, setUpFile] = useState();
   const userData = useSelector((state) => state.getUsers.getUsers);
+  function handleChange(e) {
+    console.log(e.target.files[0]);
+    setUpFile(URL.createObjectURL(e.target.files[0]));
+  }
 
   const handlePicture = (e) => {
-    e.preventDefault();
-    console.log(e.target);
     const data = new FormData();
     console.log(data);
     console.log(userData.pseudo);
@@ -24,7 +26,13 @@ const UploadImg = () => {
   };
 
   return (
-    <form action="" onSubmit={handlePicture} className="upload-pic">
+    <form
+      id="upload-form"
+      action=""
+      onChange={handleChange}
+      onSubmit={handlePicture}
+      className="upload-pic"
+    >
       <label htmlFor="file">Changer d'image</label>
       <input
         type="file"
@@ -33,6 +41,7 @@ const UploadImg = () => {
         accept=".jpg,.jpeg,png"
         onChange={(e) => setFile(e.target.files[0])}
       />
+      <img className="img-prev" src={upFile} alt="" />
       <br />
       <input type="submit" value="Envoyer" />
     </form>
