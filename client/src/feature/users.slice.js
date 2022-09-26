@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const allUsers = createSlice({
   name: "users",
@@ -9,5 +10,6 @@ export const allUsers = createSlice({
     },
   },
 });
+
 export default allUsers.reducer;
 export const { setUsers } = allUsers.actions;

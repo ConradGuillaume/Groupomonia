@@ -12,8 +12,17 @@ export const getUsers = createSlice({
     editBio: (state, { payload }) => {
       state.getUsers.bio = payload;
     },
+    setFollowUser: (state, { payload }) => {
+      state.getUsers.following = [payload, ...state.getUsers.following];
+    },
+    setUnFollowUser: (state, { payload }) => {
+      state.getUsers.following = state.getUsers.following.filter(
+        (id) => id !== payload
+      );
+    },
   },
 });
 
 export default getUsers.reducer;
-export const { setUserData, editBio } = getUsers.actions;
+export const { setUserData, editBio, setFollowUser, setUnFollowUser } =
+  getUsers.actions;

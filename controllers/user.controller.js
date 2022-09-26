@@ -93,13 +93,16 @@ module.exports.follow = (req, res) => {
 };
 
 module.exports.unfollow = async (req, res) => {
+  console.log("ID TO UNFOLLOW", req.body.idToUnFollow);
+  console.log("PARAMS ID", req.params.id);
   if (
     !ObjectId.isValid(req.params.id) ||
     !ObjectId.isValid(req.body.idToUnFollow)
   )
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
-    UserModel.findOneAndUpdate(
+    console.log("unfollow la", req.body.idToUnFollow);
+    UserModel.findByIdAndUpdate(
       req.params.id,
       { $pull: { following: req.body.idToUnFollow } },
       { new: true, upsert: true },

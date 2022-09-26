@@ -6,12 +6,14 @@ import axios from "axios";
 import dateParser from "../Utils";
 import { editBio } from "../../feature/user.slice";
 import { setUsers } from "../../feature/users.slice";
+import FollowHandler from "./FollowHandler";
 
 const UpdateProfil = () => {
   const [bio, setBio] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
   const userData = useSelector((state) => state.getUsers.getUsers);
   const usersData = useSelector((state) => state.allUsers.users);
+  const [updateImg, setupdateImg] = useState(false);
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
   const dispatch = useDispatch();
@@ -26,13 +28,13 @@ const UpdateProfil = () => {
 
     setUpdateForm(false);
   };
-   axios
+  axios
     .get(`${process.env.REACT_APP_API_URL}api/user`)
     .then((res) => dispatch(setUsers(res.data)))
     .catch((err) => {
       console.log(err);
     });
-  //usersData && console.log(usersData);
+
   // userData && console.log(userData.bio);
   return (
     userData && (
@@ -44,7 +46,19 @@ const UpdateProfil = () => {
             <div className="profil-update">
               <h3>photo de profil</h3>
               <img id="user-pic" src={userData.picture} alt="user-pic" />
-              <UploadImg />
+              <button
+                onClick={() => {
+                  setupdateImg(true);
+                }}
+                className="modify-picture"
+              >
+                Modifier ma photo
+              </button>
+              {updateImg && (
+                <span className="modal-pic">
+                  <UploadImg />
+                </span>
+              )}
             </div>
           </div>
           <div className="right-part">
@@ -74,7 +88,7 @@ const UpdateProfil = () => {
                 Membre depuis le: {dateParser(userData.createdAt)}
               </h4>
               <h5 onClick={() => setFollowingPopup(true)}>
-                abonnements : {userData.following && userData.following.length}
+                Abonnements : {userData.following && userData.following.length}
               </h5>
               <h5 onClick={() => setFollowersPopup(true)}>
                 Abonnés : {userData.followers && userData.followers.length}
@@ -85,7 +99,7 @@ const UpdateProfil = () => {
         {followingPopup && (
           <div className="popup-profil-container">
             <div className="modal">
-              <h3>Abonnements</h3>
+              <h3> Abonnements</h3>
               <span className="cross" onClick={() => setFollowingPopup(false)}>
                 &#10005;
               </span>
@@ -97,6 +111,12 @@ const UpdateProfil = () => {
                         <li key={user._id}>
                           <img src={user.picture} alt="pic" />
                           <h4>{user.pseudo}</h4>
+                          <div className="follow-handler">
+                            <FollowHandler
+                              idToFollow={user._id}
+                              type={"suggestion"}
+                            />
+                          </div>
                         </li>
                       );
                     }
@@ -112,6 +132,25 @@ const UpdateProfil = () => {
               <span className="cross" onClick={() => setFollowersPopup(false)}>
                 &#10005;
               </span>
+              <ul>
+                {usersData.map((user) => {
+                  for (let i = 0; i < userData.followers.length; i++)
+                    if (user._id === userData.followers[i]) {
+                      return (
+                        <li key={user._id}>
+                          <img src={user.picture} alt="pic" />
+                          <h4>{user.pseudo}</h4>
+                          <div className="follow-handler">
+                            <FollowHandler
+                              idToFollow={user._id}
+                              type={"suggestion"}
+                            />
+                          </div>
+                        </li>
+                      );
+                    }
+                })}
+              </ul>
             </div>
           </div>
         )}
