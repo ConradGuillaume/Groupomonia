@@ -6,11 +6,11 @@ const LeftNav = () => {
     <div className="left-nav-container">
       <div className="icons">
         <div className="icons-bis">
-          <NavLink to="/" className="active-left-nav">
+          <NavLink to="/home" className="active-left-nav">
             <img src="./img/home.png" alt="home" />
           </NavLink>
           <br />
-          <NavLink to="/" className="active-left-nav">
+          <NavLink to="/profil" className="active-left-nav">
             <img src="./img/profil.png" alt="profil" />
           </NavLink>
         </div>
