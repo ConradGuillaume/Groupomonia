@@ -1,12 +1,24 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import dateParser, { isEmpty } from "../Utils";
+import LikeButton from "./LikeButton";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [IsUpdated, setIsUpdated] = useState(false);
+  const [TextUpdate, setTextUpdate] = useState(null);
+
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
+  const updateItem = async () => {
+    return (axios.put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`),
+    { date: post.message })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   console.log(usersData);
+  console.log("PostLikers", post.likers);
   useEffect(() => {
     !isEmpty(usersData) && setIsLoading(false);
   }, [usersData]);
@@ -32,12 +44,26 @@ const Card = ({ post }) => {
                 <h3>
                   {usersData.map((user) => {
                     if (user._id === post.posterId) return user.pseudo;
+                    else return null;
                   })}
                 </h3>
               </div>
               <span>{dateParser(post.createdAt)}</span>
             </div>
-            <p>{post.message}</p>
+            {IsUpdated === false && <p>{post.message}</p>}
+            {IsUpdated && (
+              <div className="update-post">
+                <textarea
+                  defaultValue={post.message}
+                  onChange={(e) => setTextUpdate(e.target.value)}
+                />
+                <div className="button-container">
+                  <button className="btn" onClick={updateItem}>
+                    Valider modification
+                  </button>
+                </div>
+              </div>
+            )}
             {post.picture && (
               <img src={post.picture} alt="card-pic" className="card-pic" />
             )}
@@ -52,11 +78,23 @@ const Card = ({ post }) => {
                 title={post._id}
               ></iframe>
             )}
+            {userData._id === post.posterId && (
+              <div className="button-container">
+                <div onClick={() => setIsUpdated(!IsUpdated)}>
+                  <img
+                    className="edit-delete"
+                    src="./img/editer.png"
+                    alt="Edit"
+                  />
+                </div>
+              </div>
+            )}
             <div className="card-footer">
               <div className="comment-icon">
                 <img src="./img/comment.gif" alt="comment" />
                 <span>{post.comments.length}</span>
               </div>
+              <LikeButton post={post} />
             </div>
           </div>
         </>

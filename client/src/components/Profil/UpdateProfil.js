@@ -28,12 +28,6 @@ const UpdateProfil = () => {
 
     setUpdateForm(false);
   };
-  axios
-    .get(`${process.env.REACT_APP_API_URL}api/user`)
-    .then((res) => dispatch(setUsers(res.data)))
-    .catch((err) => {
-      console.log(err);
-    });
 
   // userData && console.log(userData.bio);
   return (

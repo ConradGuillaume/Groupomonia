@@ -162,11 +162,10 @@
       display: flex;
 
       div {
-        padding: 5px 9px;
+        padding: 2px 6px;
         margin-left: 5px;
-        background: $color-2;
+        background: $color-3;
         border-radius: 50px;
-        transition: 0.1s;
         cursor: pointer;
 
         &:hover {
@@ -174,8 +173,8 @@
         }
 
         img {
-          height: 16px;
-          width: 16px;
+          height: 30px;
+          width: 30px;
           transform: translateY(3px);
         }
       }

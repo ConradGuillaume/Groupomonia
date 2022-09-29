@@ -55,9 +55,12 @@ module.exports.deletePost = (req, res) => {
 };
 
 module.exports.likePost = (req, res, next) => {
+  console.log("PARAMS ICI", req.params.id);
+
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
+    console.log("BODY ICI ", req.body.id);
     PostModel.findByIdAndUpdate(
       req.params.id,
       {
