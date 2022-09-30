@@ -1,21 +1,31 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePost } from "../../feature/Posts.slice";
 import dateParser, { isEmpty } from "../Utils";
+import Delete from "./Delete";
 import LikeButton from "./LikeButton";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [IsUpdated, setIsUpdated] = useState(false);
   const [TextUpdate, setTextUpdate] = useState(null);
-
+  const dispatch = useDispatch();
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
-  const updateItem = async () => {
-    return (axios.put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`),
-    { date: post.message })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  const updateItem = () => {
+    const message = TextUpdate;
+    const postId = post._id;
+    if (TextUpdate) {
+      axios
+        .put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`, {
+          message,
+        })
+
+        .then((res) => dispatch(updatePost({ message, postId })))
+        .catch((err) => console.log(err));
+    }
+    setIsUpdated(false);
   };
   console.log(usersData);
   console.log("PostLikers", post.likers);
@@ -87,6 +97,7 @@ const Card = ({ post }) => {
                     alt="Edit"
                   />
                 </div>
+                <Delete id={post._id} />
               </div>
             )}
             <div className="card-footer">

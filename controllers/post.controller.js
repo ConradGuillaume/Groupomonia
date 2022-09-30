@@ -46,7 +46,6 @@ module.exports.updatePost = (req, res, next) => {
 
 module.exports.deletePost = (req, res) => {
   console.log("REQ PARAMS", req.params.id);
-  console.log("REQ BODY", req.body);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   PostModel.deleteOne({ _id: req.params.id })

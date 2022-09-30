@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Posts/Card";
 import { isEmpty } from "./Utils";
-import axios from "axios";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { setAllPosts } from "../feature/Posts.slice";
 
 const Thread = () => {
-  //const posts = useSelector((state) => state.allPosts.posts);
-  //console.log("LES POSTs SONT LA", posts);
+  const [LoadPost, setLoadPost] = useState(true);
 
-  const [Posts, setPosts] = useState("");
+  const Posts = useSelector((state) => state.allPosts.posts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (LoadPost) {
+      dispatch(setAllPosts());
+      setLoadPost(false);
+    }
+  }, [LoadPost]);
 
-  axios
-    .get(`${process.env.REACT_APP_API_URL}api/post`)
-    .then((res) => setPosts(res.data))
-    .catch((err) => console.log(err));
-
+  Posts && console.log("LES POSTS ARRIVENT LA", Posts);
   return (
     <div className="thread-container">
       <ul>
         {!isEmpty(Posts) &&
           Posts.map((post) => {
-            return <Card post={post} key={post._i} />;
+            return <Card post={post} key={post._id} />;
           })}
       </ul>
     </div>

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "./feature/user.slice";
 import { setAllPosts } from "./feature/Posts.slice";
 import { setUsers } from "./feature/users.slice";
+
 const App = () => {
   const [uid, SetUid] = useState(null);
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
       axios
         .get(`${process.env.REACT_APP_API_URL}api/post`)
         .then((res) => dispatch(setAllPosts(res.data)));
+
       axios
         .get(`${process.env.REACT_APP_API_URL}api/user`)
         .then((res) => dispatch(setUsers(res.data)));

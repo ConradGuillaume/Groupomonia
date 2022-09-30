@@ -15,10 +15,10 @@ const LikeButton = ({ post }) => {
   console.log("POST_ID", post._id);
   likers && console.log("LIKERS", likers);
 
-  async function getLike() {
+  const like = () => {
     const userId = userData._id;
     const postId = post._id;
-    await axios
+    axios
       .patch(`${process.env.REACT_APP_API_URL}api/post/like-post/${post._id}`, {
         id: userId,
       })
@@ -27,8 +27,10 @@ const LikeButton = ({ post }) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }
-  async function getUnlike() {
+    setLiked(true);
+  };
+
+  const unLike = () => {
     const userId = userData._id;
     const postId = post._id;
     axios
@@ -43,16 +45,7 @@ const LikeButton = ({ post }) => {
         dispatch(unLikePost({ postId, userId }));
       })
       .catch((err) => console.log(err));
-  }
-
-  const like = () => {
-    setLiked(true);
-    getLike();
-  };
-
-  const unLike = () => {
     setLiked(false);
-    getUnlike();
   };
 
   useEffect(() => {
