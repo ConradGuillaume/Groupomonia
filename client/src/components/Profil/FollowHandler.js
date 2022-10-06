@@ -56,13 +56,21 @@ const FollowHandler = ({ idToFollow, type }) => {
           onMouseLeave={() => setunFollow(false) + setfollow(true)}
           onClick={handleUnfollow}
         >
-          {follow && <button className="unFollow-btn">Abonné</button>}
-          {unFollow && <button className="unFollow-btn">désabonné</button>}
+          {type === "card" && <img src="./img/checked.png" alt="checked" />}
+          {type === "suggestion" && follow && (
+            <button className="unFollow-btn">Abonné</button>
+          )}
+          {type === "suggestion" && unFollow && (
+            <button className="unFollow-btn">désabonné</button>
+          )}
         </span>
       )}
       {isFollowed === false && !isEmpty(userData) && (
         <span onClick={handleFollow}>
-          <button className="follow-btn">Suivre</button>
+          {type === "card" && <img src="./img/unchecked.png" alt="unchecked" />}
+          {type === "suggestion" && (
+            <button className="follow-btn">Suivre</button>
+          )}
         </span>
       )}
     </>

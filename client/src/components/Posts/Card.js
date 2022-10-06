@@ -1,18 +1,29 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../feature/Posts.slice";
+import FollowHandler from "../Profil/FollowHandler";
 import dateParser, { isEmpty } from "../Utils";
+import CardComment from "./CardComment";
 import Delete from "./Delete";
 import LikeButton from "./LikeButton";
+
+import { render } from "react-dom";
+import Lottie from "lottie-web";
+import comment from "../../../src/lotties/comment.json";
+import UploadImg from "../Profil/UploadImg";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [IsUpdated, setIsUpdated] = useState(false);
   const [TextUpdate, setTextUpdate] = useState(null);
+  const [ShowComments, setShowComments] = useState(false);
+  const [updateImg, setupdateImg] = useState(false);
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
+  const container = useRef(null);
+
   const updateItem = () => {
     const message = TextUpdate;
     const postId = post._id;
@@ -38,17 +49,17 @@ const Card = ({ post }) => {
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
         <>
-          <div className="card-left">
-            <img
-              src={usersData
-                .map((user) => {
-                  if (user._id === post.posterId) return user.picture;
-                })
-                .join("")}
-              alt="poster-pic"
-            />
-          </div>
           <div className="card-right">
+            <div className="card-left">
+              <img
+                src={usersData
+                  .map((user) => {
+                    if (user._id === post.posterId) return user.picture;
+                  })
+                  .join("")}
+                alt="poster-pic"
+              />
+            </div>
             <div className="card-header">
               <div className="pseudo">
                 <h3>
@@ -57,8 +68,9 @@ const Card = ({ post }) => {
                     else return null;
                   })}
                 </h3>
+                <FollowHandler idToFollow={post.posterId} type={"card"} />
               </div>
-              <span>{dateParser(post.createdAt)}</span>
+              <span className="timeStamp">{dateParser(post.createdAt)}</span>
             </div>
             {IsUpdated === false && <p>{post.message}</p>}
             {IsUpdated && (
@@ -71,23 +83,38 @@ const Card = ({ post }) => {
                   <button className="btn" onClick={updateItem}>
                     Valider modification
                   </button>
+                  <button
+                    onClick={() => {
+                      setupdateImg(true);
+                    }}
+                    className="btn"
+                  >
+                    Modifier ma photo
+                  </button>
+                  {updateImg && (
+                    <span className="modal-pic">
+                      
+                    </span>
+                  )}
                 </div>
               </div>
             )}
-            {post.picture && (
-              <img src={post.picture} alt="card-pic" className="card-pic" />
-            )}
-            {post.video && (
-              <iframe
-                width="500"
-                height="300"
-                src={post.video}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={post._id}
-              ></iframe>
-            )}
+            <div className="pic-container">
+              {post.picture && (
+                <img src={post.picture} alt="card-pic" className="card-pic" />
+              )}
+              {post.video && (
+                <iframe
+                  width="500"
+                  height="300"
+                  src={post.video}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={post._id}
+                ></iframe>
+              )}
+            </div>
             {userData._id === post.posterId && (
               <div className="button-container">
                 <div onClick={() => setIsUpdated(!IsUpdated)}>
@@ -102,11 +129,16 @@ const Card = ({ post }) => {
             )}
             <div className="card-footer">
               <div className="comment-icon">
-                <img src="./img/comment.gif" alt="comment" />
+                <img
+                  onClick={() => setShowComments(!ShowComments)}
+                  src="./img/comment2.png"
+                  alt="comment"
+                />
                 <span>{post.comments.length}</span>
               </div>
               <LikeButton post={post} />
             </div>
+            {ShowComments && <CardComment post={post} />}
           </div>
         </>
       )}

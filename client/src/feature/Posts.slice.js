@@ -9,6 +9,9 @@ export const allPosts = createSlice({
     setAllPosts: (state, { payload }) => {
       state.posts = payload;
     },
+    addPost: (state, { payload }) => {
+      state.posts.push(payload);
+    },
 
     likePost: (state, action) => {
       state.posts.map((posts) => {
@@ -40,8 +43,43 @@ export const allPosts = createSlice({
         (post) => post._id !== action.payload.postId
       );
     },
+
+    editComment: (state, action) => {
+      state.posts.map((posts) => {
+        if (posts._id === action.payload.postId) {
+          return (posts.comments = posts.comments.map((comment) => {
+            if (comment._id === action.payload.commentId) {
+              return {
+                ...comment,
+                text: action.payload.text,
+              };
+            } else {
+              return comment;
+            }
+          }));
+        } // else return posts;
+      });
+    },
+    deleteComment: (state, action) => {
+      state.posts.map((posts) => {
+        if (posts._id === action.payload.postId) {
+          return (posts.comments = posts.comments.filter(
+            (comment) => comment._id !== action.payload.commentId
+          ));
+        } else return posts;
+      });
+    },
   },
 });
 export default allPosts.reducer;
-export const { setAllPosts, likePost, unLikePost, updatePost, deletePost } =
-  allPosts.actions;
+export const {
+  setAllPosts,
+  likePost,
+  unLikePost,
+  updatePost,
+  deletePost,
+  addComment,
+  editComment,
+  deleteComment,
+  addPost,
+} = allPosts.actions;

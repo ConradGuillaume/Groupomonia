@@ -10,6 +10,10 @@ module.exports.readPosts = (req, res) => {
   }).sort({ createdAt: -1 });
 };
 module.exports.createPost = async (req, res) => {
+  console.log("ID", req.body.posterId);
+  console.log("MESSAGE", req.body.message);
+  console.log("VIDEO", req.body.video);
+  console.log("FILE", req.file);
   const newPost = new PostModel({
     posterId: req.body.posterId,
     message: req.body.message,
@@ -35,10 +39,19 @@ module.exports.updatePost = (req, res, next) => {
   console.log("nope ?", { ...req.body });
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+  const postObject = req.file
+    ? {
+        picture: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
+  console.log(postObject);
 
   PostModel.updateOne(
     { _id: req.params.id },
-    { $set: { message: req.body.message } }
+    { $set: { message: req.body.message } },
+    { ...postObject, _id: req.params.id }
   )
     .then(() => res.status(200).json({ message: "Modified" }))
     .catch((error) => res.status(400).json({ error }));
@@ -142,7 +155,9 @@ module.exports.commentPost = (req, res) => {
 module.exports.editCommentPost = (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
+  console.log("IDHERE", req.params.id);
+  console.log("COMMENT ID", req.body.commentId);
+  console.log("TEXT", req.body.text);
   try {
     return PostModel.findById(req.params.id, (err, docs) => {
       const theComment = docs.comments.find((comment) =>

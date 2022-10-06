@@ -4,7 +4,7 @@ const multer = require("../middleware/multer");
 
 router.get("/", postController.readPosts);
 router.post("/", multer, postController.createPost);
-router.put("/:id", postController.updatePost);
+router.put("/:id", multer, postController.updatePost);
 router.delete("/:id", postController.deletePost);
 router.patch("/like-post/:id", postController.likePost);
 router.patch("/unlike-post/:id", postController.unlikePost);

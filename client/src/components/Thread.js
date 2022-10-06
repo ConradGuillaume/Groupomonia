@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Posts/Card";
 import { isEmpty } from "./Utils";
-
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setAllPosts } from "../feature/Posts.slice";
@@ -13,7 +13,9 @@ const Thread = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (LoadPost) {
-      dispatch(setAllPosts());
+      axios
+        .get(`${process.env.REACT_APP_API_URL}api/post`)
+        .then((res) => dispatch(setAllPosts(res.data)));
       setLoadPost(false);
     }
   }, [LoadPost]);
