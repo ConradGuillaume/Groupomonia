@@ -8,19 +8,31 @@ import { setAllPosts } from "../feature/Posts.slice";
 
 const Thread = () => {
   const [LoadPost, setLoadPost] = useState(true);
-
+  const [Count, setCount] = useState(5);
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >
+      document.scrollingElement.scrollHeight
+    ) {
+      setLoadPost(true);
+    }
+  };
   const Posts = useSelector((state) => state.allPosts.posts);
   const dispatch = useDispatch();
   useEffect(() => {
     if (LoadPost) {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}api/post`)
-        .then((res) => dispatch(setAllPosts(res.data)));
+      axios.get(`${process.env.REACT_APP_API_URL}api/post`).then((res) => {
+        const array = res.data.slice(0, Count);
+        dispatch(setAllPosts(array));
+      });
       setLoadPost(false);
+      setCount(Count + 5);
     }
+
+    window.addEventListener("scroll", loadMore);
+    return () => window.removeEventListener("scroll", loadMore);
   }, [LoadPost]);
 
-  Posts && console.log("LES POSTS ARRIVENT LA", Posts);
   return (
     <div className="thread-container">
       <ul>

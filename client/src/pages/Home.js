@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UidContext } from "../components/AppContext";
-import LeftNav from "../components/LeftNav";
 import NewPostForm from "../components/Posts/NewPostForm";
+import UserFriend from "../components/Profil/UserFriend";
 import Thread from "../components/Thread";
 
 const Home = () => {
@@ -9,16 +9,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      <LeftNav />
       <div className="main">
         <div className="home-header"></div>
         {uid && <NewPostForm />}
         {uid && <Thread />}
-      </div>
-      <div className="right-side">
-        <div className="right-side-container">
-          <div className="wrapper"></div>
-        </div>
+        {uid && <UserFriend />}
       </div>
     </div>
   );

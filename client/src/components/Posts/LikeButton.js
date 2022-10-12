@@ -11,9 +11,7 @@ const LikeButton = ({ post }) => {
   const likers = useSelector((state) => state.allPosts.posts);
 
   const dispatch = useDispatch();
-  console.log("MON ID", uid);
-  console.log("POST_ID", post._id);
-  likers && console.log("LIKERS", likers);
+
 
   const like = () => {
     const userId = userData._id;

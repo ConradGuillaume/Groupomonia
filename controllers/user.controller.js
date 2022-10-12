@@ -19,9 +19,23 @@ module.exports.userInfo = (req, res) => {
 };
 module.exports.updateUser = async (req, res) => {
   ////////////////////////////////////////////////////////////////////////////////////////////////////// gerer les images !!!!!!!
-
+  console.log("REQ PARAMS", req.params.id);
+  console.log("REQ BODY", req.body);
+  console.log("FILE", req.file);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+  if (req.file) {
+    UserModel.findOne({ _id: req.params.id })
+      .then((user) => {
+        console.log("USER", user);
+        const filename = user.picture.split("/images/")[1];
+        console.log("SUPR PHOTO", filename);
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) throw error;
+        });
+      })
+      .catch((error) => res.status(401).json({ error }));
+  }
   const userObject = req.file
     ? {
         picture: `${req.protocol}://${req.get("host")}/images/${
@@ -29,10 +43,14 @@ module.exports.updateUser = async (req, res) => {
         }`,
       }
     : { ...req.body };
-  console.log(userObject);
   UserModel.updateOne(
     { _id: req.params.id },
-    { ...userObject, _id: req.params.id }
+    { ...userObject, _id: req.params.id },
+    {
+      $set: {
+        bio: req.body.bio,
+      },
+    }
   )
     .then(() => res.status(200).json({ message: "User updated" }))
     .catch((error) => res.status(400).json({ error }));

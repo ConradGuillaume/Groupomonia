@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const ModifiedCardImage = () => {
+const ModifiedCardImage = ({ post }) => {
   const [file, setFile] = useState();
   const [upFile, setUpFile] = useState();
   const userData = useSelector((state) => state.getUsers.getUsers);
@@ -19,7 +19,7 @@ const ModifiedCardImage = () => {
     data.append("userId", userData._id);
     data.append("file", file);
     axios
-      .put(`${process.env.REACT_APP_API_URL}api/user/${userData._id}`, data)
+      .put(`${process.env.REACT_APP_API_URL}api/post/${userData._id}`, data)
       .then((res) => {
         console.log(res);
       });

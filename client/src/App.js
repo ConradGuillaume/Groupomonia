@@ -10,6 +10,7 @@ import { setUsers } from "./feature/users.slice";
 const App = () => {
   const [uid, SetUid] = useState(null);
   const dispatch = useDispatch();
+  const [Count, setCount] = useState(5);
   useEffect(() => {
     const fetchToken = async () => {
       await axios({
@@ -18,7 +19,6 @@ const App = () => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
           SetUid(res.data);
         })
         .catch((err) => console.log("no token"));
@@ -29,9 +29,10 @@ const App = () => {
       axios
         .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`)
         .then((res) => dispatch(setUserData(res.data)));
-      axios
-        .get(`${process.env.REACT_APP_API_URL}api/post`)
-        .then((res) => dispatch(setAllPosts(res.data)));
+      axios.get(`${process.env.REACT_APP_API_URL}api/post`).then((res) => {
+        const array = res.data.slice(0, Count);
+        dispatch(setAllPosts(array));
+      });
 
       axios
         .get(`${process.env.REACT_APP_API_URL}api/user`)

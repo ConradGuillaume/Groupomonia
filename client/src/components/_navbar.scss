@@ -16,7 +16,7 @@ nav {
     height: 45px;
     width: 110%;
     left: -20px;
-    top:0;
+    top: 0;
     position: absolute;
     backdrop-filter: blur(3px);
     background: rgba(255, 255, 255, 0.86);
@@ -31,12 +31,13 @@ nav {
     justify-content: space-between;
     height: 45px;
     align-items: center;
-    
+
     .logo {
       display: flex;
       align-items: center;
-      
+
       h3 {
+        margin-left: 30px;
         transform: translate(15px, 2px);
         font-size: 1.5rem;
         font-family: $font-3;
@@ -46,7 +47,7 @@ nav {
         width: 26px;
       }
     }
-    
+
     ul {
       display: flex;
       align-items: center;
@@ -54,21 +55,21 @@ nav {
       width: 35%;
       justify-content: space-between;
       font-size: 1.2rem;
-      
+
       .welcome {
         transform: translateY(2px);
 
         @media screen and(max-width: 590px) {
           display: none;
         }
-        
-        h5 {
+
+        #welcome-user {
+          height: 30px;
           font-family: $font-3;
         }
       }
-      
+
       li {
-        
         img {
           height: 24px;
           width: 24px;

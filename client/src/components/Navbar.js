@@ -7,7 +7,6 @@ import Logout from "./log/Logout";
 const Navbar = () => {
   const uid = useContext(UidContext);
   const userData = useSelector((state) => state.getUsers.getUsers);
-  userData && console.log(userData);
 
   return (
     <nav>
@@ -15,7 +14,6 @@ const Navbar = () => {
         <div className="logo">
           <NavLink to="/">
             <div className="logo">
-              <img src="./img/groupomonia-black.png" alt="icon" />
               <h3>Groupomonia</h3>
             </div>
           </NavLink>
@@ -25,7 +23,7 @@ const Navbar = () => {
             <li></li>
             <li className="welcome">
               <NavLink to="/profil">
-                <h5>Bienvenue {userData.pseudo} </h5>
+                <h5 id="welcome-user">Bienvenue {userData.pseudo} </h5>
               </NavLink>
             </li>
             <Logout />

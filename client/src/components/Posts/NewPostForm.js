@@ -50,7 +50,6 @@ const NewPostForm = () => {
     if (!isEmpty(userData)) setIsLoading(false);
 
     const handleVideo = () => {
-      console.log(Message.includes("https://www.yout"));
       let findLink = Message.split(" ");
       for (let i = 0; i < findLink.length; i++) {
         if (

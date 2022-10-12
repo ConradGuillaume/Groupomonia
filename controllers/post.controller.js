@@ -1,7 +1,7 @@
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
-
+const fs = require("fs");
 module.exports.readPosts = (req, res) => {
   ////////////////////////////////////////////////////////////////////// à revoir /////
   PostModel.find((err, docs) => {
@@ -33,12 +33,25 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
-module.exports.updatePost = (req, res, next) => {
+module.exports.updatePost = async (req, res, next) => {
   console.log("REQ PARAMS", req.params.id);
   console.log("REQ BODY", req.body);
-  console.log("nope ?", { ...req.body });
+  console.log("FILE", req.file);
+  console.log("MESSAGE", req.body.message);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+  if (req.file) {
+    PostModel.findOne({ _id: req.params.id })
+      .then((user) => {
+        console.log("USER", user);
+        const filename = user.picture.split("/images/")[1];
+        console.log("SUPR PHOTO", filename);
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) throw error;
+        });
+      })
+      .catch((error) => res.status(401).json({ error }));
+  }
   const postObject = req.file
     ? {
         picture: `${req.protocol}://${req.get("host")}/images/${
@@ -46,24 +59,32 @@ module.exports.updatePost = (req, res, next) => {
         }`,
       }
     : { ...req.body };
-  console.log(postObject);
-
-  PostModel.updateOne(
+  console.log("BODYBODY", { ...req.body });
+  PostModel.findByIdAndUpdate(
     { _id: req.params.id },
-    { $set: { message: req.body.message } },
-    { ...postObject, _id: req.params.id }
+    { ...postObject, _id: req.params.id },
+    { $set: { message: req.body.message } }
   )
-    .then(() => res.status(200).json({ message: "Modified" }))
+    .then(() => res.status(200).json({ message: "Modified message" }))
     .catch((error) => res.status(400).json({ error }));
+
+  console.log("post object", postObject);
 };
 
 module.exports.deletePost = (req, res) => {
   console.log("REQ PARAMS", req.params.id);
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-  PostModel.deleteOne({ _id: req.params.id })
-    .then(() => res.status(200).json({ message: "Deleted" }))
-    .catch((error) => res.status(400).json({ error }));
+  PostModel.findOne({ _id: req.params.id }).then((user) => {
+    if (!ObjectId.isValid(req.params.id)) {
+      return res.status(400).send("ID unknown : " + req.params.id);
+    } else {
+      const filename = user.picture.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        PostModel.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: "Deleted" }))
+          .catch((error) => res.status(400).json({ error }));
+      });
+    }
+  });
 };
 
 module.exports.likePost = (req, res, next) => {

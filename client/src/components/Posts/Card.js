@@ -1,17 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePost } from "../../feature/Posts.slice";
+import { NavLink, Link, Routes } from "react-router-dom";
+import { setAllPosts, updatePost } from "../../feature/Posts.slice";
 import FollowHandler from "../Profil/FollowHandler";
 import dateParser, { isEmpty } from "../Utils";
 import CardComment from "./CardComment";
 import Delete from "./Delete";
 import LikeButton from "./LikeButton";
-
-import { render } from "react-dom";
-import Lottie from "lottie-web";
-import comment from "../../../src/lotties/comment.json";
-import UploadImg from "../Profil/UploadImg";
+import { createContext } from "react";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,23 +20,53 @@ const Card = ({ post }) => {
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
   const container = useRef(null);
+  const [file, setFile] = useState();
+  const [upFile, setUpFile] = useState();
+  const [IdValue, SetIdValue] = useState();
 
-  const updateItem = () => {
+  function handleChange(e) {
+    console.log(e.target.files[0]);
+    setUpFile(URL.createObjectURL(e.target.files[0]));
+  }
+
+  const updateItem = async (e) => {
+     e.preventDefault();
     const message = TextUpdate;
     const postId = post._id;
-    if (TextUpdate) {
+    const data = new FormData();
+    console.log(file);
+    console.log(postId);
+    console.log(userData.pseudo);
+    data.append("name", userData.pseudo);
+    data.append("userId", userData._id);
+    data.append("file", file);
+    data.append("message", message);
+    if (data || TextUpdate) {
+      await axios
+        .put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`, data, {
+          message,
+        })
+        .then(() => dispatch(updatePost({ message, postId })))
+        .then((res) => console.log("c'est PHOTO", res))
+        .catch((err) => console.log(err));
+
+      await axios
+        .get(`${process.env.REACT_APP_API_URL}api/post`)
+        .then((res) => dispatch(setAllPosts(res.data)));
+    }
+    /*if (TextUpdate) {
       axios
         .put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`, {
           message,
         })
-
-        .then((res) => dispatch(updatePost({ message, postId })))
+        .then(() => dispatch(updatePost({ message, postId })))
+        .then((res) => console.log("c'est moi", res))
         .catch((err) => console.log(err));
     }
+    setIsUpdated(false);*/
     setIsUpdated(false);
   };
-  console.log(usersData);
-  console.log("PostLikers", post.likers);
+
   useEffect(() => {
     !isEmpty(usersData) && setIsLoading(false);
   }, [usersData]);
@@ -51,21 +78,24 @@ const Card = ({ post }) => {
         <>
           <div className="card-right">
             <div className="card-left">
-              <img
-                src={usersData
-                  .map((user) => {
-                    if (user._id === post.posterId) return user.picture;
-                  })
-                  .join("")}
-                alt="poster-pic"
-              />
+              <Link to={`/Public/${post.posterId}`}>
+                <img
+                  src={usersData
+                    .map((user) => {
+                      if (user._id === post.posterId) return user.picture;
+                    })
+                    .join("")}
+                  alt="poster-pic"
+                />
+              </Link>
             </div>
             <div className="card-header">
               <div className="pseudo">
                 <h3>
                   {usersData.map((user) => {
-                    if (user._id === post.posterId) return user.pseudo;
-                    else return null;
+                    if (user._id === post.posterId) {
+                      return user.pseudo;
+                    } else return null;
                   })}
                 </h3>
                 <FollowHandler idToFollow={post.posterId} type={"card"} />
@@ -93,7 +123,25 @@ const Card = ({ post }) => {
                   </button>
                   {updateImg && (
                     <span className="modal-pic">
-                      
+                      <form
+                        id="upload-form"
+                        action=""
+                        onChange={handleChange}
+                        onSubmit={updateItem}
+                        className="upload-pic"
+                      >
+                        <label htmlFor="file">Changer d'image</label>
+                        <input
+                          type="file"
+                          id="file"
+                          name="file"
+                          accept=".jpg,.jpeg,png"
+                          onChange={(e) => setFile(e.target.files[0])}
+                        />
+                        <img className="img-prev" src={upFile} alt="" />
+                        <br />
+                        <input type="submit" value="Envoyer" />
+                      </form>
                     </span>
                   )}
                 </div>
@@ -145,5 +193,13 @@ const Card = ({ post }) => {
     </li>
   );
 };
-
+export const UserContext = createContext();
+export const UserProvider = (props) => {
+  const [PictureId, setPictureId] = useState();
+  return (
+    <UserContext.Provider value={PictureId}>
+      {props.children}
+    </UserContext.Provider>
+  );
+};
 export default Card;
