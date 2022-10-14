@@ -28,11 +28,13 @@ module.exports.updateUser = async (req, res) => {
     UserModel.findOne({ _id: req.params.id })
       .then((user) => {
         console.log("USER", user);
-        const filename = user.picture.split("/images/")[1];
-        console.log("SUPR PHOTO", filename);
-        fs.unlink(`images/${filename}`, (error) => {
-          if (error) throw error;
-        });
+        if (user.picture !== "./uploads/profil/random-user.png") {
+          const filename = user.picture.split("/images/")[1];
+          console.log("SUPR PHOTO", filename);
+          fs.unlink(`images/${filename}`, (error) => {
+            if (error) throw error;
+          });
+        }
       })
       .catch((error) => res.status(401).json({ error }));
   }

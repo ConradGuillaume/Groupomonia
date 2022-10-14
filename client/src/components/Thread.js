@@ -3,7 +3,6 @@ import Card from "./Posts/Card";
 import { isEmpty } from "./Utils";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
 import { setAllPosts } from "../feature/Posts.slice";
 
 const Thread = () => {
@@ -21,10 +20,11 @@ const Thread = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (LoadPost) {
-      axios.get(`${process.env.REACT_APP_API_URL}api/post`).then((res) => {
-        const array = res.data.slice(0, Count);
-        dispatch(setAllPosts(array));
-      });
+      axios
+        .get(`${process.env.REACT_APP_API_URL}api/post?p=${Count}`)
+        .then((res) => {
+          dispatch(setAllPosts(res.data));
+        });
       setLoadPost(false);
       setCount(Count + 5);
     }

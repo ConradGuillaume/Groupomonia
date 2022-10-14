@@ -2,12 +2,20 @@ const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 const fs = require("fs");
-module.exports.readPosts = (req, res) => {
-  ////////////////////////////////////////////////////////////////////// à revoir /////
-  PostModel.find((err, docs) => {
-    if (!err) res.send(docs);
-    else console.log("err to get data", err);
-  }).sort({ createdAt: -1 });
+
+module.exports.readPosts = (req, res, next) => {
+  const post = req.query.p || 5;
+
+  PostModel.find()
+    .sort({ createdAt: -1 })
+    .limit(post)
+    .then((docs) => {
+      console.log("RES", docs);
+      res.json(docs);
+    })
+    .catch((error) => {
+      res.json(console.log(error));
+    });
 };
 module.exports.createPost = async (req, res) => {
   console.log("ID", req.body.posterId);
@@ -42,25 +50,29 @@ module.exports.updatePost = async (req, res, next) => {
     return res.status(400).send("ID unknown : " + req.params.id);
   if (req.file) {
     PostModel.findOne({ _id: req.params.id })
-      .then((user) => {
-        console.log("USER", user);
-        const filename = user.picture.split("/images/")[1];
-        console.log("SUPR PHOTO", filename);
-        fs.unlink(`images/${filename}`, (error) => {
-          if (error) throw error;
-        });
+      .then((post) => {
+        console.log("USER", post);
+        if (post.picture) {
+          const filename = post.picture.split("/images/")[1];
+          console.log("SUPR PHOTO", filename);
+          fs.unlink(`images/${filename}`, (error) => {
+            if (error) throw error;
+          });
+        }
       })
       .catch((error) => res.status(401).json({ error }));
   }
   const postObject = req.file
     ? {
+        ...req.body,
         picture: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
-  console.log("BODYBODY", { ...req.body });
-  PostModel.findByIdAndUpdate(
+
+  console.log("POSTOBJEC", postObject);
+  PostModel.updateOne(
     { _id: req.params.id },
     { ...postObject, _id: req.params.id },
     { $set: { message: req.body.message } }

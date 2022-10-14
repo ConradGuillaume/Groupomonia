@@ -9,6 +9,7 @@ import CardComment from "./CardComment";
 import Delete from "./Delete";
 import LikeButton from "./LikeButton";
 import { createContext } from "react";
+import { setUsers } from "../../feature/users.slice";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,7 @@ const Card = ({ post }) => {
   }
 
   const updateItem = async (e) => {
-     e.preventDefault();
+    e.preventDefault();
     const message = TextUpdate;
     const postId = post._id;
     const data = new FormData();
@@ -54,16 +55,7 @@ const Card = ({ post }) => {
         .get(`${process.env.REACT_APP_API_URL}api/post`)
         .then((res) => dispatch(setAllPosts(res.data)));
     }
-    /*if (TextUpdate) {
-      axios
-        .put(`${process.env.REACT_APP_API_URL}api/post/${post._id}`, {
-          message,
-        })
-        .then(() => dispatch(updatePost({ message, postId })))
-        .then((res) => console.log("c'est moi", res))
-        .catch((err) => console.log(err));
-    }
-    setIsUpdated(false);*/
+
     setIsUpdated(false);
   };
 

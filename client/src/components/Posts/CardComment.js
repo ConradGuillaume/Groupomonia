@@ -63,7 +63,6 @@ const CardComment = ({ post }) => {
                 <h3>{comment.commenterPseudo}</h3>
               </div>
               <span>
-                
                 {comment.timestamp && timestampParser(comment.timestamp)}
               </span>
             </div>

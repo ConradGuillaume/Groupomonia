@@ -1,28 +1,29 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../../feature/user.slice";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
   const [upFile, setUpFile] = useState();
   const userData = useSelector((state) => state.getUsers.getUsers);
+  const dispatch = useDispatch();
   function handleChange(e) {
     console.log(e.target.files[0]);
     setUpFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  const handlePicture = (e) => {
+  const handlePicture = async (e) => {
+    //e.preventDefault();
     const data = new FormData();
     console.log(data);
     console.log(userData.pseudo);
     data.append("name", userData.pseudo);
     data.append("userId", userData._id);
     data.append("file", file);
-    axios
+    await axios
       .put(`${process.env.REACT_APP_API_URL}api/user/${userData._id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+      .then((res) => console.log(res));
   };
 
   return (

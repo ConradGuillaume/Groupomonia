@@ -101,5 +101,23 @@
         box-shadow: none;
       }
     }
+    .more-users {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $color-2;
+      font-size: 40px;
+      background: $color-1;
+      cursor: pointer;
+      border-radius: 30px;
+      width: 30px;
+      height: 30px;
+      transition: 0.5s ease;
+      &:hover {
+        border: 2px solid white;
+        background: $color-3;
+        transform: scale(1.08);
+      }
+    }
   }
 }
