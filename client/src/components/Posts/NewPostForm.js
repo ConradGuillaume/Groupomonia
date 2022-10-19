@@ -31,7 +31,6 @@ const NewPostForm = () => {
         .post(`${process.env.REACT_APP_API_URL}api/post/`, data)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
-      // await dispatch(addPost({ id, Message, File, Video }));
       await axios
         .get(`${process.env.REACT_APP_API_URL}api/post`)
         .then((res) => dispatch(setAllPosts(res.data)));
@@ -68,7 +67,7 @@ const NewPostForm = () => {
   }, [userData, Message, Video]);
 
   return (
-    <div className="post-container">
+    <div className="post-container" tabIndex="">
       {IsLoading ? (
         <i className="fas fa-spinner fa-pulse"></i>
       ) : (
@@ -87,7 +86,7 @@ const NewPostForm = () => {
           </div>
           <NavLink to="/profil">
             <div className="user-info">
-              <img src={userData.picture} alt="user-picture" />
+              <img src={userData.picture} alt="user-picture" tabIndex="" />
             </div>
           </NavLink>
           <div className="post-form">

@@ -16,6 +16,9 @@ const UserFriend = () => {
     const count = () => {
       setCount(Count + 5);
     };
+    const discount = () => {
+      setCount(Count - 5);
+    };
     return (
       <div className="container">
         <div className=" date-bis">
@@ -63,9 +66,14 @@ const UserFriend = () => {
               );
               //}
             })}
-            <span className="more-users" onClick={count}>
-              +
-            </span>
+            <div className="more-users-container">
+              <span className="more-users" onClick={count}>
+                +
+              </span>
+              <span className="more-users" onClick={discount}>
+                -
+              </span>
+            </div>
           </ul>
         )}
       </div>

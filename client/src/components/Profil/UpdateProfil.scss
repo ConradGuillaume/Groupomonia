@@ -1,11 +1,17 @@
 .profil-container {
-  margin-top: 100px;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 10%;
   background: $color-2;
-  margin-top: 15%;
   padding-bottom: 80px;
-  height: 100%;
+  min-height: 800px;
+  button {
+    &:focus {
+      border: 5px solid rgb(0, 37, 248);
+      padding: 1%;
+    }
+  }
+
   .modal-pic {
     opacity: 0;
     animation: appear 1s ease-in forwards;
@@ -55,6 +61,7 @@
       .modify-picture {
         display: flex;
         color: white;
+        font-size: 18px;
         justify-content: center;
         border-radius: 40px;
         transition: 0.5s;
@@ -174,7 +181,8 @@
   }
   button {
     margin-top: 2%;
-    width: 50%;
+    width: 200px;
+    font-size: 18px;
     margin-left: 30%;
     justify-content: center;
   }
@@ -306,15 +314,15 @@ h5 {
         }
 
         button {
-          color: $color-2;
-          background: $color-4;
+          color: $color-4;
+          background: $color-2;
           border-radius: 20px;
-          margin-right: 6px;
+          width: 150px;
           box-shadow: 2px 3px 5px $color-2;
 
           &:hover {
-            color: $color-2;
-            background: red;
+            color: red;
+            font-size: 18px;
             transform: translateX(2px);
           }
         }

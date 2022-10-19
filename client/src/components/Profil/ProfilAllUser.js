@@ -16,7 +16,6 @@ const ProfilAllUser = () => {
     return (
       <>
         <div className="profil-container">
-          <LeftNav />
           <h1></h1>
           <div className="update-container">
             <div className="left-part">
@@ -95,7 +94,6 @@ const ProfilAllUser = () => {
               </div>
             </div>
           )}
-
         </div>
       </>
     );

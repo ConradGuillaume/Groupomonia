@@ -27,7 +27,7 @@ app.use(cookieParser());
 //JWT
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
-  console.log("RES LOCALS", res.locals.user._id);
+  //console.log("RES LOCALS", res.locals.user._id);
   res.status(200).send(res.locals.user._conditions._id);
 });
 // routes
@@ -37,5 +37,5 @@ app.use("/api/post", postRoutes);
 //server
 
 app.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT}`);
+ // console.log(`listening on port ${process.env.PORT}`);
 });

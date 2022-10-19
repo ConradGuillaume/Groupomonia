@@ -5,12 +5,18 @@ const fs = require("fs");
 
 module.exports.readPosts = (req, res, next) => {
   const post = req.query.p || 5;
+  console.log(
+    "QUERY================================================================>",
+    post
+  );
 
   PostModel.find()
     .sort({ createdAt: -1 })
     .limit(post)
     .then((docs) => {
-      console.log("RES", docs);
+      console.log(
+        "REs==================================================================>"
+      );
       res.json(docs);
     })
     .catch((error) => {
@@ -18,10 +24,6 @@ module.exports.readPosts = (req, res, next) => {
     });
 };
 module.exports.createPost = async (req, res) => {
-  console.log("ID", req.body.posterId);
-  console.log("MESSAGE", req.body.message);
-  console.log("VIDEO", req.body.video);
-  console.log("FILE", req.file);
   const newPost = new PostModel({
     posterId: req.body.posterId,
     message: req.body.message,
@@ -42,19 +44,14 @@ module.exports.createPost = async (req, res) => {
 };
 
 module.exports.updatePost = async (req, res, next) => {
-  console.log("REQ PARAMS", req.params.id);
-  console.log("REQ BODY", req.body);
-  console.log("FILE", req.file);
-  console.log("MESSAGE", req.body.message);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+  console.log("object ID", ObjectId);
   if (req.file) {
     PostModel.findOne({ _id: req.params.id })
       .then((post) => {
-        console.log("USER", post);
         if (post.picture) {
           const filename = post.picture.split("/images/")[1];
-          console.log("SUPR PHOTO", filename);
           fs.unlink(`images/${filename}`, (error) => {
             if (error) throw error;
           });
@@ -71,7 +68,6 @@ module.exports.updatePost = async (req, res, next) => {
       }
     : { ...req.body };
 
-  console.log("POSTOBJEC", postObject);
   PostModel.updateOne(
     { _id: req.params.id },
     { ...postObject, _id: req.params.id },
@@ -79,12 +75,9 @@ module.exports.updatePost = async (req, res, next) => {
   )
     .then(() => res.status(200).json({ message: "Modified message" }))
     .catch((error) => res.status(400).json({ error }));
-
-  console.log("post object", postObject);
 };
 
 module.exports.deletePost = (req, res) => {
-  console.log("REQ PARAMS", req.params.id);
   PostModel.findOne({ _id: req.params.id }).then((user) => {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).send("ID unknown : " + req.params.id);
@@ -100,12 +93,9 @@ module.exports.deletePost = (req, res) => {
 };
 
 module.exports.likePost = (req, res, next) => {
-  console.log("PARAMS ICI", req.params.id);
-
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
-    console.log("BODY ICI ", req.body.id);
     PostModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -163,8 +153,6 @@ module.exports.unlikePost = (req, res) => {
   }
 };
 module.exports.commentPost = (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   PostModel.findOneAndUpdate(
@@ -188,15 +176,13 @@ module.exports.commentPost = (req, res) => {
 module.exports.editCommentPost = (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-  console.log("IDHERE", req.params.id);
-  console.log("COMMENT ID", req.body.commentId);
-  console.log("TEXT", req.body.text);
+
   try {
     return PostModel.findById(req.params.id, (err, docs) => {
       const theComment = docs.comments.find((comment) =>
         comment._id.equals(req.body.commentId)
       );
-
+      console.log("COMMENT", theComment);
       if (!theComment) return res.status(404).send("Comment not found");
       theComment.text = req.body.text;
 

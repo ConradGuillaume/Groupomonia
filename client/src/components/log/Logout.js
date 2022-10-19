@@ -23,7 +23,7 @@ const Logout = () => {
 
   return (
     <li onClick={logout}>
-      <img src="./img/logout.png" alt="logout" />
+      <img className="logout" src="./img/logout.png" alt="logout" />
     </li>
   );
 };

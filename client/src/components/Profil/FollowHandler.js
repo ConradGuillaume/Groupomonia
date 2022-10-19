@@ -39,14 +39,11 @@ const FollowHandler = ({ idToFollow, type }) => {
   };
 
   useEffect(() => {
-
-
     if (!isEmpty(userData.following.includes(idToFollow))) {
       if (userData.following.includes(idToFollow)) {
         setIsFollowed(true);
       } else setIsFollowed(false);
     }
- 
   }, [userData, idToFollow]);
   return (
     <>

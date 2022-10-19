@@ -33,22 +33,58 @@ const SignUpForm = () => {
           setSubmitForm(true);
         })
         .catch((err) => {
+          console.log(err);
           setErrorMail("");
           setErrorPassword("");
           setErrorPseudo("");
-          console.log(err.response.data.errors);
 
-          if (err.response.data.errors.email) {
-            setErrorMail(err.response.data.errors.email);
+          if (err.response.data.messagePseudo) {
+            setErrorPseudo(err.response.data.messagePseudo);
+          } else if (err.response.data.messagePseudoIncorrect) {
+            setErrorPseudo(err.response.data.messagePseudoIncorrect);
           }
-          if (err.response.data.errors.pseudo) {
-            setErrorPseudo(err.response.data.errors.pseudo);
+          if (err.response.data.messageNoMail) {
+            setErrorMail(err.response.data.messageNoMail);
+          } else if (err.response.data.messageMailIncorrect) {
+            setErrorMail(err.response.data.messageMailIncorrect);
           }
-          if (err.response.data.errors.password) {
-            setErrorPassword(err.response.data.errors.password);
+          if (err.response.data.messagePassNull) {
+            setErrorPassword(err.response.data.messagePassNull);
+          } else if (err.response.data.messageInvalidPass) {
+            setErrorPassword(err.response.data.messageInvalidPass);
           }
         });
     }
+    /*if (pseudo.length === 0) {
+      console.log(pseudo.length);
+      setErrorPseudo("veuillez rentrer un Nom / Prénom");
+    } else if (pseudo.length > 0 && (pseudo.length < 1 || pseudo.length > 40)) {
+      setErrorPseudo("le nom / Prénom doit faire entre 1 et 40 caractères");
+    } else if (!pseudo.match(/^[#.0-9a-zA-ZÀ-ÿ\s,-]{2,60}$/)) {
+      setErrorPseudo(
+        "Le Nom / Prénom ne doit pas contenir de caractère spéciaux "
+      );
+    }
+    /* if (email.length === 0) {
+      setErrorMail("veuillez rentrer une adresse e-mail ");
+    } else if (
+      !email.match(
+        /^((\w[^\W]+)[.-]?){1,}@(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/
+      )
+    ) {
+      setErrorMail(
+        "l'email n'est pas valide merci de le remplir correctement "
+      );
+    }*/
+    /* if (password.length === 0) {
+      setErrorPassword("veuillez rentrer un mot de passe ");
+    } else if (
+      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+    ) {
+      setErrorPassword(
+        "Minimum 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre"
+      );
+    }*/
   };
 
   return (

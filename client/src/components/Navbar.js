@@ -12,21 +12,32 @@ const Navbar = () => {
     <nav>
       <div className="nav-container">
         <div className="logo">
-          <NavLink to="/">
+          <NavLink className="navigate" to="/" tabIndex={0}>
             <div className="logo">
               <h3>Groupomonia</h3>
             </div>
           </NavLink>
         </div>
         {uid && userData ? (
-          <ul>
-            <li></li>
+          <ul className="user-nav">
             <li className="welcome">
-              <NavLink to="/profil">
-                <h5 id="welcome-user">Bienvenue {userData.pseudo} </h5>
+              <NavLink className="navigate" to="/profil">
+                <span id="welcome-user">Bienvenue {userData.pseudo} </span>
               </NavLink>
             </li>
-            <Logout />
+            <div className="logo-container">
+              <li>
+                <NavLink className="navigate" to="/profil">
+                  <img src="./img/profil.png" alt="profil" />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="navigate" to="/home">
+                  <img src="./img/home.png" alt="home" />
+                </NavLink>
+              </li>
+              <Logout />
+            </div>
           </ul>
         ) : (
           <ul>

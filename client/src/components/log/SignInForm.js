@@ -26,12 +26,16 @@ const SignInForm = () => {
         SetPasswordError();
         console.log(err);
         console.log(err.response.status);
-        if (err.response.status === 404) {
+        if (email.length === 0) {
+          SetEmailError("Veuillez remplir l'email");
+        } else if (err.response.status === 404) {
           SetEmailError(err.response.data.message);
         } else {
-          SetEmailError("");
+          //SetEmailError("");
         }
-        if (err.response.status === 401) {
+        if (password.length === 0) {
+          SetPasswordError("Veuillez remplir le mot-de-passe");
+        } else if (err.response.status === 401) {
           SetPasswordError(err.response.data.message);
         }
       });

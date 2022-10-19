@@ -8,29 +8,24 @@ module.exports.getAllUsers = async (req, res) => {
 };
 
 module.exports.userInfo = (req, res) => {
-  console.log("params here ", req.params);
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   UserModel.findById(req.params.id, (err, docs) => {
     if (!err) res.send(docs);
-    else console.log("ID unknown :" + err);
   }).select("-password");
 };
 module.exports.updateUser = async (req, res) => {
   ////////////////////////////////////////////////////////////////////////////////////////////////////// gerer les images !!!!!!!
-  console.log("REQ PARAMS", req.params.id);
-  console.log("REQ BODY", req.body);
-  console.log("FILE", req.file);
+
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   if (req.file) {
     UserModel.findOne({ _id: req.params.id })
       .then((user) => {
-        console.log("USER", user);
         if (user.picture !== "./uploads/profil/random-user.png") {
           const filename = user.picture.split("/images/")[1];
-          console.log("SUPR PHOTO", filename);
+
           fs.unlink(`images/${filename}`, (error) => {
             if (error) throw error;
           });
@@ -78,8 +73,6 @@ module.exports.deleteUser = (req, res) => {
 };
 
 module.exports.follow = (req, res) => {
-  console.log("ID TO FOLLOW", req.body.idToFollow);
-  console.log("PARAMS ID", req.params.id);
   if (
     !ObjectId.isValid(req.params.id) ||
     !ObjectId.isValid(req.body.idToFollow)
@@ -113,15 +106,12 @@ module.exports.follow = (req, res) => {
 };
 
 module.exports.unfollow = async (req, res) => {
-  console.log("ID TO UNFOLLOW", req.body.idToUnFollow);
-  console.log("PARAMS ID", req.params.id);
   if (
     !ObjectId.isValid(req.params.id) ||
     !ObjectId.isValid(req.body.idToUnFollow)
   )
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
-    console.log("unfollow la", req.body.idToUnFollow);
     UserModel.findByIdAndUpdate(
       req.params.id,
       { $pull: { following: req.body.idToUnFollow } },

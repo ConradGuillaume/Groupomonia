@@ -33,7 +33,6 @@ const UpdateProfil = () => {
   return (
     userData && (
       <div className="profil-container">
-        <LeftNav />
         <h1>profil de {userData.pseudo}</h1>
         <div className="update-container">
           <div className="left-part">
@@ -45,6 +44,7 @@ const UpdateProfil = () => {
                   setupdateImg(true);
                 }}
                 className="modify-picture"
+                tabIndex={0}
               >
                 Modifier ma photo
               </button>
@@ -63,7 +63,10 @@ const UpdateProfil = () => {
                   <p onClick={() => setUpdateForm(!updateForm)}>
                     {userData.bio}
                   </p>
-                  <button onClick={() => setUpdateForm(!updateForm)}>
+                  <button
+                    className="glow-on-hover"
+                    onClick={() => setUpdateForm(!updateForm)}
+                  >
                     Modifier bio
                   </button>
                 </>

@@ -24,6 +24,8 @@ const Card = ({ post }) => {
   const [file, setFile] = useState();
   const [upFile, setUpFile] = useState();
   const [IdValue, SetIdValue] = useState();
+  const isAllowed =
+    userData && (userData._id === post.posterId || userData.admin === true);
 
   function handleChange(e) {
     console.log(e.target.files[0]);
@@ -63,7 +65,7 @@ const Card = ({ post }) => {
     !isEmpty(usersData) && setIsLoading(false);
   }, [usersData]);
   return (
-    <li className="card-container" key={post._id}>
+    <li className="card-container" key={post._id} tabIndex="1">
       {isLoading ? (
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
@@ -131,8 +133,6 @@ const Card = ({ post }) => {
                           onChange={(e) => setFile(e.target.files[0])}
                         />
                         <img className="img-prev" src={upFile} alt="" />
-                        <br />
-                        <input type="submit" value="Envoyer" />
                       </form>
                     </span>
                   )}
@@ -155,7 +155,7 @@ const Card = ({ post }) => {
                 ></iframe>
               )}
             </div>
-            {userData._id === post.posterId && (
+            {isAllowed && (
               <div className="button-container">
                 <div onClick={() => setIsUpdated(!IsUpdated)}>
                   <img
