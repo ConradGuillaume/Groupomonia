@@ -67,7 +67,7 @@ const NewPostForm = () => {
   }, [userData, Message, Video]);
 
   return (
-    <div className="post-container" tabIndex="">
+    <div className="post-container" tabIndex="0">
       {IsLoading ? (
         <i className="fas fa-spinner fa-pulse"></i>
       ) : (
@@ -84,7 +84,7 @@ const NewPostForm = () => {
               {userData.followers && userData.followers.length > 1 ? "s" : null}
             </p>
           </div>
-          <NavLink to="/profil">
+          <NavLink className="tab" tabIndex="1" to="/profil">
             <div className="user-info">
               <img src={userData.picture} alt="user-picture" tabIndex="" />
             </div>

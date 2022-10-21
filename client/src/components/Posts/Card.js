@@ -65,7 +65,7 @@ const Card = ({ post }) => {
     !isEmpty(usersData) && setIsLoading(false);
   }, [usersData]);
   return (
-    <li className="card-container" key={post._id} tabIndex="1">
+    <li className="card-container" key={post._id}>
       {isLoading ? (
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
@@ -73,14 +73,17 @@ const Card = ({ post }) => {
           <div className="card-right">
             <div className="card-left">
               <Link to={`/Public/${post.posterId}`}>
-                <img
-                  src={usersData
-                    .map((user) => {
-                      if (user._id === post.posterId) return user.picture;
-                    })
-                    .join("")}
-                  alt="poster-pic"
-                />
+                <button className="tab-nav-btn-pic">
+                  <img
+                    tabIndex="0"
+                    src={usersData
+                      .map((user) => {
+                        if (user._id === post.posterId) return user.picture;
+                      })
+                      .join("")}
+                    alt="poster-pic"
+                  />
+                </button>
               </Link>
             </div>
             <div className="card-header">
@@ -157,7 +160,7 @@ const Card = ({ post }) => {
             </div>
             {isAllowed && (
               <div className="button-container">
-                <div onClick={() => setIsUpdated(!IsUpdated)}>
+                <div className="btn" onClick={() => setIsUpdated(!IsUpdated)}>
                   <img
                     className="edit-delete"
                     src="./img/editer.png"

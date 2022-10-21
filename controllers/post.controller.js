@@ -7,15 +7,17 @@ module.exports.readPosts = (req, res, next) => {
   const post = req.query.p || 5;
   console.log(
     "QUERY================================================================>",
-    post
+    req.query
   );
 
   PostModel.find()
     .sort({ createdAt: -1 })
     .limit(post)
     .then((docs) => {
+      const comment = docs.find((comments) => comments);
       console.log(
-        "REs==================================================================>"
+        "COMMENT================================================================>",
+        comment
       );
       res.json(docs);
     })

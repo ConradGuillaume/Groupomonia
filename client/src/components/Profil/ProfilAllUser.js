@@ -5,14 +5,29 @@ import axios from "axios";
 import dateParser, { isEmpty } from "../Utils";
 import LeftNav from "../LeftNav";
 import { setUsers } from "../../feature/users.slice";
+import { setOneUser } from "../../feature/OneUser.slice";
+
 const ProfilAllUser = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const usersData = useSelector((state) => state.allUsers.users);
-  const findUser = usersData.find((user) => user._id === params.Id);
+
+  useEffect(() => {
+    if (params.Id) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}api/user/${params.Id}`)
+        .then((res) => {
+          dispatch(setOneUser(res.data));
+        });
+    }
+  }, []);
+
+  const OneUser = useSelector((state) => state.getOneUser.getOneUser);
+  console.log(OneUser);
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
 
-  if (usersData) {
+  if (OneUser) {
     return (
       <>
         <div className="profil-container">
@@ -20,23 +35,23 @@ const ProfilAllUser = () => {
           <div className="update-container">
             <div className="left-part">
               <div className="profil-update">
-                <h3>{findUser.pseudo}</h3>
-                <img id="user-pic" src={findUser.picture} alt="" />
+                <h3>{OneUser.pseudo}</h3>
+                <img id="user-pic" src={OneUser.picture} alt="" />
               </div>
             </div>
             <div className="right-part">
               <div className="bio-update">
                 <h3>bio</h3>
-                <p>{findUser.bio}</p>
+                <p>{OneUser.bio}</p>
                 <h4 id="member">
-                  membre depuis le :{dateParser(findUser.createdAt)}
+                  membre depuis le :{dateParser(OneUser.createdAt)}
                 </h4>
                 <h5 onClick={() => setFollowingPopup(true)}>
                   {" "}
-                  Abonnements :{findUser.following && findUser.following.length}
+                  Abonnements :{OneUser.following && OneUser.following.length}
                 </h5>
                 <h5 onClick={() => setFollowersPopup(true)}>
-                  abonnés :{findUser.followers && findUser.followers.length}
+                  abonnés :{OneUser.followers && OneUser.followers.length}
                 </h5>
               </div>
             </div>
@@ -54,8 +69,8 @@ const ProfilAllUser = () => {
                 </span>
                 <ul>
                   {usersData.map((user) => {
-                    for (let i = 0; i < findUser.following.length; i++)
-                      if (user._id === findUser.following[i]) {
+                    for (let i = 0; i < OneUser.following.length; i++)
+                      if (user._id === OneUser.following[i]) {
                         return (
                           <li key={user._id}>
                             <img src={user.picture} alt="pic" />
@@ -80,8 +95,8 @@ const ProfilAllUser = () => {
                 </span>
                 <ul>
                   {usersData.map((user) => {
-                    for (let i = 0; i < findUser.followers.length; i++)
-                      if (user._id === findUser.followers[i]) {
+                    for (let i = 0; i < OneUser.followers.length; i++)
+                      if (user._id === OneUser.followers[i]) {
                         return (
                           <li key={user._id}>
                             <img src={user.picture} alt="pic" />
