@@ -5,14 +5,11 @@ import { UserProvider } from "../components/Posts/Card";
 import { useParams } from "react-router-dom";
 
 const ProfilPublic = () => {
-  const params = useParams();
   return (
     <>
-      <UserProvider>
-        <div>
-          <ProfilAllUser />
-        </div>
-      </UserProvider>
+      <div>
+        <ProfilAllUser />
+      </div>
     </>
   );
 };

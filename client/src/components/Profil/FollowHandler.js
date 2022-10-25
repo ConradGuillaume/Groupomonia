@@ -48,7 +48,7 @@ const FollowHandler = ({ idToFollow, type }) => {
   return (
     <>
       {isFollowed && !isEmpty(userData) && (
-        <span
+        <button
           onMouseEnter={() => setunFollow(true) + setfollow(false)}
           onMouseLeave={() => setunFollow(false) + setfollow(true)}
           onClick={handleUnfollow}
@@ -60,15 +60,15 @@ const FollowHandler = ({ idToFollow, type }) => {
           {type === "suggestion" && unFollow && (
             <button className="unFollow-btn">désabonné</button>
           )}
-        </span>
+        </button>
       )}
       {isFollowed === false && !isEmpty(userData) && (
-        <span onClick={handleFollow}>
+        <button onClick={handleFollow}>
           {type === "card" && <img src="./img/unchecked.png" alt="unchecked" />}
           {type === "suggestion" && (
             <button className="follow-btn">Suivre</button>
           )}
-        </span>
+        </button>
       )}
     </>
   );

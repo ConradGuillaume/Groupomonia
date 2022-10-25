@@ -8,10 +8,8 @@ const LikeButton = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const uid = useContext(UidContext);
   const userData = useSelector((state) => state.getUsers.getUsers);
-  const likers = useSelector((state) => state.allPosts.posts);
 
   const dispatch = useDispatch();
-
 
   const like = () => {
     const userId = userData._id;
@@ -52,7 +50,7 @@ const LikeButton = ({ post }) => {
   }, [uid, post.likers, liked]);
 
   return (
-    <div className="like-container">
+    <button className="like-container">
       {uid && liked === false && (
         <img src="./img/heart-empty.png" alt="like" onClick={like} />
       )}
@@ -60,7 +58,7 @@ const LikeButton = ({ post }) => {
         <img src="./img/heart.png" alt="unlike" onClick={unLike} />
       )}
       <span>{post.likers.length}</span>
-    </div>
+    </button>
   );
 };
 

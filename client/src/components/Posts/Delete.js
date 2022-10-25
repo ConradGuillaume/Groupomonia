@@ -8,7 +8,9 @@ const Delete = (props) => {
   const postId = props.id;
 
   return (
-    <div
+    <button
+      tabIndex="0"
+      role="button"
       onClick={() => {
         if (window.confirm("Voulez-vous supprimer cet article ?")) {
           axios
@@ -19,7 +21,7 @@ const Delete = (props) => {
       }}
     >
       <img src="./img/delete.png" alt="delete" />
-    </div>
+    </button>
   );
 };
 

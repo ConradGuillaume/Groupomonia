@@ -6,6 +6,7 @@ import ProfilPublic from "../../pages/ProfilPublic";
 import LeftNav from "../LeftNav";
 import Navbar from "../Navbar";
 import { UserProvider } from "../UserContext";
+import PageError from "../../pages/PageError";
 
 const index = () => {
   return (
@@ -15,7 +16,8 @@ const index = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/Profil" element={<Profil />} />
         <Route path="/Public/:Id" element={<ProfilPublic />} />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<PageError />} />
+        <Route path="/404" element={<PageError />} />
       </Routes>
     </Router>
   );

@@ -21,6 +21,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    @media screen and(max-width: 600px) {
+      margin: 0%;
+    }
   }
   .card-container {
     border: 3px inset $color-3;
@@ -34,11 +37,13 @@
     margin: 2% 0% 0% 0%;
     position: relative;
 
-    @media screen and(max-width: 590px) {
-      grid-template-columns: 1fr;
-    }
-    @media screen and(max-width: 440px) {
-      padding-top: 26px;
+    @media screen and(max-width: 600px) {
+      padding: 0;
+      margin: 0;
+      margin-bottom: 2%;
+      width: 100%;
+      background: transparent;
+      border: 3px inset $color-2;
     }
 
     .fa-spinner {
@@ -60,10 +65,10 @@
         box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
         object-fit: cover;
 
-        @media screen and(max-width: 590px) {
-          height: 40px;
-          width: 40px;
-          margin-left: 18px;
+        @media screen and(max-width: 600px) {
+          margin: 0%;
+          height: 50px;
+          width: 50px;
           border-radius: 14px;
         }
       }
@@ -79,10 +84,9 @@
     }
 
     .card-right {
-      @media screen and(max-width: 590px) {
-        margin-left: 18px;
-        border: 12px solid;
-        background: red;
+      @media screen and(max-width: 600px) {
+        background: #ddc3a5d5;
+        width: 100%;
       }
       .card-header {
         display: flex;
@@ -90,30 +94,34 @@
         margin: 2px 0 4px;
         min-height: 35px;
 
-        @media screen and(max-width: 590px) {
-          margin: 12px 0 14px;
-        }
-
-        @media screen and(max-width: 440px) {
-          flex-direction: column;
+        @media screen and(max-width: 600px) {
+          margin: 0;
+          height: 100px;
         }
 
         .pseudo {
           display: flex;
+          align-items: center;
           justify-content: space-between;
           margin-left: 2%;
 
-          @media screen and(max-width: 590px) {
-            margin-left: 52px;
-          }
-          @media screen and(max-width: 440px) {
-            transform: translateY(-18px);
+          @media screen and(max-width: 600px) {
+            margin-left: 70px;
           }
 
-          span {
+          button {
+            display: flex;
+            align-items: center;
+            width: auto !important;
+            background: transparent;
             transform: translate(0px, -5px);
+            &:focus {
+              border: transparent;
+              transform: scale(1.08);
+              border-bottom: 2px solid $color-2;
+            }
 
-            @media screen and(max-width: 440px) {
+            @media screen and(max-width: 600px) {
               margin: 0px 0 -10px;
               padding: 0;
             }
@@ -122,11 +130,15 @@
               padding: 5px;
               cursor: pointer;
               transition: 0.15s;
-              height: 28px;
-              width: 28px;
+              height: 38px;
+              width: 38px;
 
               &:hover {
                 transform: scale(1.2) translate(0px, 0px);
+              }
+              @media screen and(max-width: 600px) {
+                height: 25px;
+                width: 25px;
               }
             }
 
@@ -148,8 +160,9 @@
           right: 0%;
           top: 0%;
 
-          @media screen and(max-width: 440px) {
-            transform: translate(52px, -20px);
+          @media screen and(max-width: 600px) {
+            color: $color-2;
+            font-weight: 900;
           }
         }
       }
@@ -166,11 +179,29 @@
         }
       }
       .update-post {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
         textarea {
           font-size: 1.3rem;
           border: 1px solid $color-2;
           padding: 10px;
+          width: 100%;
           border-radius: 20px 20px 6px 20px;
+        }
+        .button-container {
+          display: flex;
+          justify-content: space-around;
+          width: 100%;
+          .bn {
+            background: black o !important;
+            width: auto !important;
+            font-size: 18px !important;
+            color: white !important;
+            background: $color-2 !important;
+            margin: 2%;
+            padding: 2%;
+          }
         }
         .button-container {
           .btn {
@@ -190,17 +221,17 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        padding-bottom: 35px;
+        margin-right: 10%;
+        padding: 0px 35px 35px 35px;
         border-bottom: 2px solid $color-2;
+        object-fit: contain;
         border-radius: 5%;
-        //object-fit: contain;
+
         .card-pic {
           display: flex;
-          width: 80%;
-          height: 80%;
-          margin: 0px 2% 0px 2%;
+          max-height: 500px;
+          max-width: 100%;
           border-radius: 15px;
-          object-fit: contain;
           box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
         }
       }
@@ -217,6 +248,20 @@
         margin-top: 10px;
         display: flex;
         flex-wrap: wrap;
+
+        button {
+          background: transparent !important;
+          border: none !important;
+          width: auto !important;
+          font-size: 0;
+          cursor: pointer;
+          img {
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+          }
+        }
+
         span {
           width: 100%;
           margin: 1% 5%;
@@ -263,6 +308,12 @@
         .like-container {
           display: flex;
           align-items: center;
+          background: transparent !important;
+          border: none !important;
+          width: auto !important;
+          color: $color-2;
+          font-size: 0;
+          font-size: 0;
 
           span {
             font-size: 1.02rem;
@@ -280,6 +331,14 @@
         border-radius: 20px 20px 6px 20px;
         margin: 0px 10px 20px 10px;
         box-shadow: 3px 3px 4px 2px #201e20;
+        span {
+          @media screen and(max-width: 600px) {
+            position: relative;
+            margin-right: 10px;
+            height: 100%;
+            bottom: 0%;
+          }
+        }
         .left-part {
           display: flex;
           justify-content: space-between;
@@ -296,6 +355,9 @@
           .pseudo {
             display: flex;
             align-items: center;
+            @media screen and(max-width: 600px) {
+              margin-bottom: 10px;
+            }
           }
         }
         .right-part {
@@ -303,6 +365,8 @@
           justify-content: flex-start;
           width: 100%;
           margin: 0px;
+          @media screen and(max-width: 600px) {
+          }
           p {
             color: #201e20;
             min-height: 50px;
@@ -315,6 +379,9 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
             margin-left: 15px;
+            @media screen and(max-width: 600px) {
+              border: 2px solid;
+            }
           }
 
           .edit-comment {
@@ -323,6 +390,14 @@
             justify-content: center;
             margin-bottom: 20px;
             margin-right: 8px;
+            @media screen and(max-width: 600px) {
+              border: solid 2px;
+              margin: 0;
+            }
+            button {
+              width: auto;
+              background: transparent;
+            }
 
             img {
               width: 25px;
@@ -339,14 +414,21 @@
                 height: 80px;
                 padding-right: 5px;
                 padding-left: 5px;
+                @media screen and(max-width: 600px) {
+                  border: solid 2px;
+                  margin: 0;
+                  height: 50px;
+                }
               }
               .btn-edit {
                 display: flex;
+
                 .btn {
                   display: flex;
                   justify-content: center;
                   align-items: center;
                   width: 20%;
+                  margin-right: 5%;
                 }
                 input[type="submit"] {
                   width: 80%;
@@ -381,6 +463,14 @@
         border-radius: 20px 20px 20px 6px;
         margin: 0px 10px 20px 10px;
         box-shadow: 3px 3px 4px 2px #201e20;
+        span {
+          @media screen and(max-width: 600px) {
+            position: relative;
+            margin-right: 10px;
+            height: 100%;
+            bottom: 0%;
+          }
+        }
         .left-part {
           display: flex;
           justify-content: space-between;
@@ -398,6 +488,9 @@
             display: flex;
             flex-direction: column;
             margin-left: 2%;
+            @media screen and(max-width: 600px) {
+              margin-bottom: 10px;
+            }
           }
         }
         .right-part {
@@ -416,6 +509,59 @@
           margin-left: 15px;
           margin-right: 10px;
           margin-bottom: 20px;
+        }
+        .edit-comment {
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          margin-bottom: 20px;
+          margin-right: 8px;
+
+          img {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+          }
+          .edit-comment-form {
+            border-radius: 15px;
+
+            input {
+              color: $color-2;
+              font-size: 15px;
+              font-weight: 900;
+              height: 80px;
+              padding-right: 5px;
+              padding-left: 5px;
+            }
+            .btn-edit {
+              display: flex;
+              .btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 20%;
+              }
+              input[type="submit"] {
+                width: 80%;
+                background: #201e20;
+                color: #ddc3a5;
+                font-family: "font-3", serif;
+                cursor: pointer;
+                transition: 0.4s;
+                margin-top: 10px;
+                height: 50px;
+                padding: 5px 10px;
+                cursor: pointer;
+                font-size: 1rem;
+                border-radius: 20px 20px 6px 20px;
+                &:hover {
+                  color: white;
+                  transform: scale(1.03);
+                  box-shadow: none;
+                }
+              }
+            }
+          }
         }
       }
 
@@ -474,6 +620,9 @@
       textarea {
         width: 100% !important;
         height: 80px;
+        &:focus {
+          border: 4px solid;
+        }
       }
       .button-container {
         text-align: right;

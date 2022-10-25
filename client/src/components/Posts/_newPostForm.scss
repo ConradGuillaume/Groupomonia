@@ -8,6 +8,30 @@
   width: 100%;
   margin-left: 4%;
   margin-right: 33%;
+  @media screen and(max-width :1135px) {
+    margin: 50px;
+    margin-top: 50px;
+
+    width: 100%;
+  }
+
+  @media screen and(max-width: 600px) {
+    margin: 0;
+    margin-top: 20%;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
+  }
+  .content {
+    width: 80%;
+    overflow: hidden;
+    object-fit: contain;
+    img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 15px;
+    }
+  }
   &:focus {
     border: 5px solid rgb(0, 0, 0);
   }
@@ -68,11 +92,14 @@
       border-radius: 20px 20px 6px 20px;
     }
     .card-container {
-      background: $white;
+      display: flex;
+      justify-content: flex-start;
+      background: $color-1;
       border-radius: 20px 20px 6px 20px;
 
       .card-left {
         text-align: left;
+        margin-right: 15px;
         img {
           @media screen and(max-width: 590px) {
             margin-left: 0;
@@ -109,32 +136,15 @@
             }
           }
         }
-        .content {
-          padding: 6px 0;
-          p {
-            text-align: left;
-            margin: 2px 0 6px;
-            font-size: 1.1rem;
-          }
-          img {
-            width: 100%;
-            border-radius: 6px;
-            margin-top: 12px;
-          }
-          @media screen and(max-width: 632px) {
-            margin-top: 20px;
-          }
-        }
       }
     }
     .footer-form {
       display: flex;
       justify-content: space-between;
-      margin: 0 auto;
+      margin-top: 10px;
       width: 100%;
 
       .icon {
-        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -153,8 +163,11 @@
 
         button {
           width: 190px;
+          margin-top: 20px;
+          margin-left: 85px;
+          margin-right: 35%;
           padding: 10px 20px;
-          background: $white;
+
           transition: 0.2s;
 
           &:hover {
@@ -191,13 +204,16 @@
         color: red;
       }
       .btn-send {
+        margin-left: 20%;
+
         .cancel {
           border-radius: 20px;
+          background: $color-2;
+          color: $color-4;
           margin-right: 8px;
-          background: $white;
 
           &:hover {
-            color: $color-4;
+            color: $color-2;
             background: $color-3;
           }
         }

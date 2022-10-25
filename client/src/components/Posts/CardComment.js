@@ -10,6 +10,7 @@ const CardComment = ({ post }) => {
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
+
   const handleComment = async (e) => {
     e.preventDefault();
     const commenterId = userData._id;
@@ -70,7 +71,11 @@ const CardComment = ({ post }) => {
               <div className="comment-header"></div>
 
               <p>{comment.text}</p>
-              <EditDeleteComment comment={comment} postId={post._id} />
+              <EditDeleteComment
+                data={userData}
+                comment={comment}
+                postId={post._id}
+              />
             </div>
           </div>
         );

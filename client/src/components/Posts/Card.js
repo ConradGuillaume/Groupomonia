@@ -95,7 +95,9 @@ const Card = ({ post }) => {
                     } else return null;
                   })}
                 </h3>
-                <FollowHandler idToFollow={post.posterId} type={"card"} />
+                {userData._id !== post.posterId && (
+                  <FollowHandler idToFollow={post.posterId} type={"card"} />
+                )}
               </div>
               <span className="timeStamp">{dateParser(post.createdAt)}</span>
             </div>
@@ -106,15 +108,16 @@ const Card = ({ post }) => {
                   defaultValue={post.message}
                   onChange={(e) => setTextUpdate(e.target.value)}
                 />
+
                 <div className="button-container">
-                  <button className="btn" onClick={updateItem}>
+                  <button className="bn" onClick={updateItem}>
                     Valider modification
                   </button>
                   <button
                     onClick={() => {
                       setupdateImg(true);
                     }}
-                    className="btn"
+                    className="bn"
                   >
                     Modifier ma photo
                   </button>
@@ -160,25 +163,28 @@ const Card = ({ post }) => {
             </div>
             {isAllowed && (
               <div className="button-container">
-                <div className="btn" onClick={() => setIsUpdated(!IsUpdated)}>
+                <button id="modify" onClick={() => setIsUpdated(!IsUpdated)}>
                   <img
                     className="edit-delete"
                     src="./img/editer.png"
                     alt="Edit"
                   />
-                </div>
+                </button>
                 <Delete id={post._id} />
               </div>
             )}
             <div className="card-footer">
-              <div className="comment-icon">
+              <button
+                className="comment-icon"
+                onClick={() => setShowComments(!ShowComments)}
+              >
                 <img
                   onClick={() => setShowComments(!ShowComments)}
                   src="./img/comment2.png"
                   alt="comment"
                 />
                 <span>{post.comments.length}</span>
-              </div>
+              </button>
               <LikeButton post={post} />
             </div>
             {ShowComments && <CardComment post={post} />}

@@ -4,12 +4,13 @@ import { UidContext } from "../AppContext";
 import { useDispatch } from "react-redux";
 import { deleteComment, editComment } from "../../feature/Posts.slice";
 
-const EditDeleteComment = ({ comment, postId }) => {
+const EditDeleteComment = ({ data, comment, postId }) => {
   const [IsAuthor, setISAuthor] = useState(false);
   const [Edit, setEdit] = useState(false);
   const [Text, setText] = useState("");
   const dispatch = useDispatch();
   const uid = useContext(UidContext);
+  const [Admin, setAdmin] = useState(false);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -42,19 +43,20 @@ const EditDeleteComment = ({ comment, postId }) => {
   console.log(uid);
   useEffect(() => {
     const checkAuthor = () => {
-      if (uid === comment.commenterId) {
+      if (uid === comment.commenterId || data.admin === true) {
+        setAdmin(true);
         setISAuthor(true);
       }
     };
     checkAuthor();
-  }, [uid, comment.commenterId]);
+  }, [uid, comment.commenterId, data.admin, true]);
 
   return (
     <div className="edit-comment">
       {IsAuthor && Edit === false && (
-        <span onClick={() => setEdit(!Edit)}>
+        <button onClick={() => setEdit(!Edit)}>
           <img src="./img/editer.png" alt="edit" />
-        </span>
+        </button>
       )}
       {IsAuthor && Edit && (
         <form action="" onSubmit={handleEdit} className="edit-comment-form">
@@ -71,7 +73,7 @@ const EditDeleteComment = ({ comment, postId }) => {
           <br />
           <div className="btn-edit">
             <div className="btn">
-              <span
+              <button
                 onClick={() => {
                   if (window.confirm("supprimer le commentaire ? ")) {
                     handleDelete();
@@ -79,7 +81,7 @@ const EditDeleteComment = ({ comment, postId }) => {
                 }}
               >
                 <img src="./img/delete.png" alt="trash" />
-              </span>
+              </button>
             </div>
             <input type="submit" value="valider modifications" />
           </div>

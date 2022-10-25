@@ -45,18 +45,20 @@ const UserFriend = () => {
                     <li className="connected" key="id">
                       <img src={user.picture} alt="pic" />
                       <h4>{user.pseudo}</h4>
-                      <FollowHandler
-                        className="btn"
-                        idToFollow={user._id}
-                        type={"suggestion"}
-                      />
+                      {uid !== user._id && (
+                        <FollowHandler
+                          id="glow"
+                          idToFollow={user._id}
+                          type={"suggestion"}
+                        />
+                      )}
                     </li>
                   ) : (
                     <li className="disconnected" key="id">
                       <img src={user.picture} alt="pic" />
                       <h4>{user.pseudo}</h4>
                       <FollowHandler
-                        className="btn"
+                        id="glow"
                         idToFollow={user._id}
                         type={"suggestion"}
                       />
