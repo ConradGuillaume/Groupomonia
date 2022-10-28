@@ -6,15 +6,12 @@ nav {
   box-shadow: 18px 1px 0px $color-1, 22px 4px 0px 0px $shadow;
   z-index: 10;
   top: 0;
+
   .navigate {
     &:focus {
       z-index: 12;
       text-decoration: underline 2px black;
     }
-  }
-
-  @media screen and(max-width: 1251px) {
-    padding: 0 20px;
   }
 
   &::after {
@@ -36,6 +33,9 @@ nav {
     justify-content: space-between;
     height: 45px;
     align-items: center;
+    @media screen and(max-width: 1000px) {
+      display: flex;
+    }
 
     .logo {
       display: flex;
@@ -46,6 +46,9 @@ nav {
         transform: translate(15px, 2px);
         font-size: 1.5rem;
         font-family: $font-3;
+        @media screen and(max-width: 600px) {
+          display: none;
+        }
       }
       img {
         height: 26px;
@@ -62,6 +65,10 @@ nav {
       justify-content: flex-start;
       width: 33%;
       font-size: 1.2rem;
+      @media screen and(max-width: 1000px) {
+        width: 320px;
+        margin: 0;
+      }
       .logo-container {
         display: flex;
         width: 200px;
@@ -73,7 +80,6 @@ nav {
         align-items: center;
         height: 50%;
         width: 400px;
-        transform: translateY(2px);
 
         #welcome-user {
           height: 30px;
@@ -82,14 +88,8 @@ nav {
           z-index: 10;
           margin-left: 10px;
           height: 100%;
-          transition: 0.5s ease-in-out;
           &:hover {
-            color: $color-4;
-            background: $color-2;
-            border-radius: 15px;
-            padding: 10px;
-            font-size: 22px;
-            transform: scaleX(2);
+            text-decoration: underline 2px black;
           }
         }
       }

@@ -3,12 +3,13 @@ import axios from "axios";
 import cookie from "js-cookie";
 
 const Logout = () => {
+  //kill du cookie dans le front 
   const removeCookie = (key) => {
     if (window !== "undefined") {
       cookie.remove(key, { expires: 1 });
     }
   };
-
+// Kill du cookie dans le back 
   const logout = async () => {
     await axios({
       method: "get",

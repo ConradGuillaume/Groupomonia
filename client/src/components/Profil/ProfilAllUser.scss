@@ -1,6 +1,293 @@
-.postuser-container {
-  border: 2px solid;
-  background: red;
-  width: 100%;
+.profil-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5%;
+  background: $color-2;
+  padding-bottom: 100px;
+  min-height: 800px;
+  @media screen and(max-width: 1000px) {
+    margin-top: 8%;
+  }
+
+  button {
+    &:focus {
+      border: 5px solid rgb(0, 37, 248);
+      padding: 1%;
+    }
+  }
+
+  .modal-pic {
+    opacity: 0;
+    animation: appear 1s ease-in forwards;
+  }
+  .left-nav-container {
+    position: absolute;
+    top: 0;
+  }
+  @keyframes appear {
+    from {
+      opacity: 0%;
+    }
+    to {
+      opacity: 100%;
+    }
+  }
+
+  h1 {
+    color: white;
+    display: flex;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    justify-content: center;
+    align-items: center;
+    @media screen and(max-width: 600px) {
+      margin: 0;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .left-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    border-radius: 45px;
+    @media screen and(max-width: 1000px) {
+      width: 100%;
+      margin-bottom: 5%;
+    }
+    @media screen and(max-width: 600px) {
+      width: 100%;
+    }
+    .profil-update {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: $color-1;
+      width: 80%;
+      height: 100%;
+      padding: 5%;
+      border-radius: 45px;
+      box-shadow: 0px 0px 4px 5px white;
+      button {
+        align-items: center;
+      }
+
+      .modify-picture {
+        display: flex;
+        color: white;
+        font-size: 18px;
+        justify-content: center;
+        border-radius: 40px;
+        transition: 0.5s;
+        font-weight: 600;
+        padding: 3%;
+        width: 200px;
+        margin-bottom: 20px;
+        &:hover {
+          box-shadow: none;
+          transform: scale(1.05);
+          border: solid 2px rgb(0, 0, 0);
+        }
+      }
+    }
+  }
+  #user-pic {
+    height: 200px;
+    width: 200px;
+    border-radius: 55px;
+    border: 2px solid $color-2;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: $color-3;
+    object-fit: cover;
+  }
+  .update-container {
+    display: flex;
+    width: 100%;
+    @media screen and(max-width: 1000px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+#file {
+  border: 25px red;
+  justify-content: center;
+  display: none;
+}
+#upload-form {
+  background: $color-1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  align-items: center;
+  box-shadow: 0px 0px 7px 1px black;
+
+  .img-prev {
+    height: 150px;
+    width: 150px;
+    border: dotted 2px;
+    object-fit: contain;
+  }
+
+  label {
+    color: white;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 25px;
+    background: $color-2;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    transition: 1s;
+    &:hover {
+      border: 1px solid $color-2;
+      color: $color-2;
+      background: $color-1;
+      transform: scale(1.02);
+    }
+  }
+}
+.right-part {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  @media screen and(max-width: 600px) {
+    width: 100%;
+  }
+  @media screen and(max-width: 1000px) {
+    width: 100%;
+  }
+
+  .bio-update {
+    background: $color-1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 3%;
+    border-radius: 45px;
+    width: 80%;
+    max-height: 550px;
+    box-shadow: 0px 0px 4px 5px white;
+    @media screen and(max-width: 1000px) {
+      justify-content: center;
+    }
+
+    h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2%;
+      width: 100%;
+    }
+    p {
+      color: $color-2;
+      margin: 0% 10%;
+      background: $color-3;
+      width: 100%;
+    }
+    textarea {
+      margin: 0px 10%;
+      width: 100%;
+    }
+  }
+  p,
+  textarea {
+    color: $color-2;
+    min-height: 100px;
+    border: 1px solid $color-1;
+    border-radius: 20px 20px 6px 20px;
+    background: wheat;
+    padding: 10px 20px;
+    width: 80%;
+    font-size: 1.3rem;
+  }
+  textarea {
+    align-items: center;
+    border: solid 2px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  button {
+    width: 40%;
+    position: relative;
+    left: 50%;
+    margin-top: -20px;
+    border-radius: 15px 5px 15px 15px;
+    font-size: 18px;
+    @media screen and(max-width: 1000px) {
+      margin-top: 0%;
+      left: 20%;
+    }
+  }
+
+  #member {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: red($color: #000000);
+
+    height: 50px;
+    width: 100%;
+  }
+}
+h5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color-2;
+  color: $color-4;
+  font-family: $font-3;
+  cursor: pointer;
+  transition: 0.2s;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  width: 190px;
+  margin-left: 35%;
+  border-radius: 20px 20px 20px 20px;
   height: 50px;
+  @media screen and(max-width: 1000px) {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0%;
+  }
+
+  transition: 0.2s;
+  &:hover {
+    transform: scale(1.07);
+  }
+}
+.popup-profil-container {
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: fixed;
+  animation: popup 1s forwards;
+
+  @keyframes popup {
+    to {
+      backdrop-filter: blur(2px);
+    }
+  }
+
+  .post-container {
+    background-color: red;
+    width: 100%;
+    height: 50px;
+  }
 }

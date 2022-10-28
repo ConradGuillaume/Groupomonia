@@ -20,6 +20,7 @@ module.exports.updateUser = async (req, res) => {
 
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+
   if (req.file) {
     UserModel.findOne({ _id: req.params.id })
       .then((user) => {
@@ -40,6 +41,7 @@ module.exports.updateUser = async (req, res) => {
         }`,
       }
     : { ...req.body };
+
   UserModel.updateOne(
     { _id: req.params.id },
     { ...userObject, _id: req.params.id },
@@ -96,7 +98,6 @@ module.exports.follow = (req, res) => {
       { $addToSet: { followers: req.params.id } },
       { new: true, upsert: true },
       (err, docs) => {
-        // if (!err) res.status(201).json(docs);
         if (err) return res.status(400).json(err);
       }
     );
@@ -126,8 +127,7 @@ module.exports.unfollow = async (req, res) => {
       req.body.idToUnFollow,
       { $pull: { followers: req.params.id } },
       { new: true, upsert: true },
-      (err, docs) => {
-        //if (!err) res.status(201).json(docs);
+      (err) => {
         if (err) return res.status(400).json(err);
       }
     );

@@ -16,7 +16,8 @@ const SignUpForm = () => {
   const register = async (e) => {
     e.preventDefault();
     setPasswordConfirmError("");
-    if (password != controlPassword) {
+    //Vérification mot de passe indentique
+    if (password !== controlPassword) {
       setPasswordConfirmError("les mots de passe ne correspondent pas ");
     } else {
       await axios({
@@ -28,10 +29,11 @@ const SignUpForm = () => {
           password,
         },
       })
+        //Envoie des données une fois juste et vérifié
         .then((res) => {
-          console.log(res);
           setSubmitForm(true);
         })
+        //Récuperation des erreurs provenant du Back  et interprétation en temps réel dans le front
         .catch((err) => {
           console.log(err);
           setErrorMail("");
@@ -55,38 +57,8 @@ const SignUpForm = () => {
           }
         });
     }
-    /*if (pseudo.length === 0) {
-      console.log(pseudo.length);
-      setErrorPseudo("veuillez rentrer un Nom / Prénom");
-    } else if (pseudo.length > 0 && (pseudo.length < 1 || pseudo.length > 40)) {
-      setErrorPseudo("le nom / Prénom doit faire entre 1 et 40 caractères");
-    } else if (!pseudo.match(/^[#.0-9a-zA-ZÀ-ÿ\s,-]{2,60}$/)) {
-      setErrorPseudo(
-        "Le Nom / Prénom ne doit pas contenir de caractère spéciaux "
-      );
-    }
-    /* if (email.length === 0) {
-      setErrorMail("veuillez rentrer une adresse e-mail ");
-    } else if (
-      !email.match(
-        /^((\w[^\W]+)[.-]?){1,}@(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      setErrorMail(
-        "l'email n'est pas valide merci de le remplir correctement "
-      );
-    }*/
-    /* if (password.length === 0) {
-      setErrorPassword("veuillez rentrer un mot de passe ");
-    } else if (
-      password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
-    ) {
-      setErrorPassword(
-        "Minimum 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre"
-      );
-    }*/
   };
-
+  // si enregistrement validé  redirection vers SigneInForm
   return (
     <>
       {submitForm ? (

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import LeftNav from "../LeftNav";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
 import axios from "axios";
 import dateParser from "../Utils";
 import { editBio } from "../../feature/user.slice";
-import { setUsers } from "../../feature/users.slice";
 import FollowHandler from "./FollowHandler";
 
 const UpdateProfil = () => {
@@ -17,6 +15,8 @@ const UpdateProfil = () => {
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
   const dispatch = useDispatch();
+
+  /*Fonction pour éditer la bio et enregistrer dans la BDD et le store redux   */
   const handleUpdate = () => {
     axios({
       method: "put",
@@ -29,7 +29,6 @@ const UpdateProfil = () => {
     setUpdateForm(false);
   };
 
-  // userData && console.log(userData.bio);
   return (
     userData && (
       <div className="profil-container">
@@ -93,6 +92,7 @@ const UpdateProfil = () => {
             </div>
           </div>
         </div>
+        {/*MODAL DE FOLLOWERS ET FOLLOWING/ ABONNEMENT ET ABONNE   */}
         {followingPopup && (
           <div className="popup-profil-container">
             <div className="modal">

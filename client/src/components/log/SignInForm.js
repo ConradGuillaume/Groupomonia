@@ -18,20 +18,16 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        console.log(res);
-        if (res) window.location = "/profil";
+        if (res) window.location = "/home";
       })
+      //Gestion des erreur en Front et en back
       .catch((err) => {
         SetEmailError();
         SetPasswordError();
-        console.log(err);
-        console.log(err.response.status);
         if (email.length === 0) {
           SetEmailError("Veuillez remplir l'email");
         } else if (err.response.status === 404) {
           SetEmailError(err.response.data.message);
-        } else {
-          //SetEmailError("");
         }
         if (password.length === 0) {
           SetPasswordError("Veuillez remplir le mot-de-passe");

@@ -44,6 +44,9 @@ const LikeButton = ({ post }) => {
     setLiked(false);
   };
 
+  /*test si l'id utilisateur (uid) est présent  dans ce cas le coeur seras noir setLiked true
+  si je n'ai pas encore like le post il seras false et je pourrais donc liker le post */
+
   useEffect(() => {
     if (post.likers.includes(uid)) setLiked(true);
     else setLiked(false);

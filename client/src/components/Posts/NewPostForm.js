@@ -20,6 +20,7 @@ const NewPostForm = () => {
     setVideo("");
   };
 
+  /*envoie du Post a la base de donné et stockage dans le store redux   */
   const handlePost = async () => {
     if (Message || PostPicture || Video) {
       const data = new FormData();
@@ -39,15 +40,17 @@ const NewPostForm = () => {
       alert("entrez un message");
     }
   };
+
+  /*Remet les champs "Post" sur  "vide"   */
   const cancelPost = () => {
     setMessage("");
     setPostPicture("");
     setVideo("");
     setFile("");
   };
+  /*gestion des paramètres de la video youtube /vérification présence de la data et fin du spinner */
   useEffect(() => {
     if (!isEmpty(userData)) setIsLoading(false);
-
     const handleVideo = () => {
       let findLink = Message.split(" ");
       for (let i = 0; i < findLink.length; i++) {
@@ -84,6 +87,7 @@ const NewPostForm = () => {
               {userData.followers && userData.followers.length > 1 ? "s" : null}
             </p>
           </div>
+          {/*Redirection vers le profil personnel  de l'utilisateur  */}
           <NavLink className="tab" tabIndex="1" to="/profil">
             <div className="user-info">
               <img src={userData.picture} alt="user-picture" tabIndex="" />
@@ -111,7 +115,7 @@ const NewPostForm = () => {
                   </div>
                   <div className="content">
                     <p>{Message}</p>
-                    <img src={PostPicture} alt="" />
+                    <img src={PostPicture} alt="Post-picture" />
                     {Video && (
                       <iframe
                         src={Video}

@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="logo">
           <NavLink className="navigate" to="/" tabIndex={0}>
             <div className="logo">
-              <h3>Groupomonia</h3>
+              <h3>Groupomania</h3>
             </div>
           </NavLink>
         </div>
@@ -50,6 +50,7 @@ const Navbar = () => {
           </ul>
         )}
       </div>
+      
     </nav>
   );
 };

@@ -5,7 +5,7 @@ import SignInForm from "./SignInForm";
 const Log = (props) => {
   const [signUpModal, SetSignUpModal] = useState(props.signup);
   const [signInModal, SetSignInModal] = useState(props.signin);
-
+  //Gestion des modals de connection
   const handleModals = (e) => {
     if (e.target.id === "register") {
       SetSignInModal(false);
@@ -20,18 +20,10 @@ const Log = (props) => {
     <div className="connection-form">
       <div className="form-container">
         <ul>
-          <li
-            onClick={handleModals}
-            id="register"
-            className={signUpModal ? "activ-btn" : null}
-          >
+          <li onClick={handleModals} id="register">
             s'inscrire
           </li>
-          <li
-            onClick={handleModals}
-            id="login"
-            className={signInModal ? "activ-btn" : null}
-          >
+          <li onClick={handleModals} id="login">
             se connecter
           </li>
         </ul>

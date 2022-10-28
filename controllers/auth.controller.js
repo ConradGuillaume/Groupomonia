@@ -2,7 +2,6 @@ const UserModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
-const { signUpErrors, signInErrors } = require("../utils/errors.utils");
 
 const validatePassword = (password) => {
   const regexPassword =
@@ -60,9 +59,6 @@ module.exports.signUp = async (req, res) => {
     });
   }
 
-  console.log("============================> REQBODY", req.body);
-  console.log("============================>EMAIL", req.body.email);
-  console.log("============================>");
   const user = new User({
     pseudo: req.body.pseudo,
     email: req.body.email,

@@ -5,20 +5,11 @@ const fs = require("fs");
 
 module.exports.readPosts = (req, res, next) => {
   const post = req.query.p || 5;
-  console.log(
-    "QUERY================================================================>",
-    req.query
-  );
 
   PostModel.find()
     .sort({ createdAt: -1 })
     .limit(post)
     .then((docs) => {
-      const comment = docs.find((comments) => comments);
-      console.log(
-        "COMMENT================================================================>",
-        comment
-      );
       res.json(docs);
     })
     .catch((error) => {
@@ -48,7 +39,7 @@ module.exports.createPost = async (req, res) => {
 module.exports.updatePost = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-  console.log("object ID", ObjectId);
+
   if (req.file) {
     PostModel.findOne({ _id: req.params.id })
       .then((post) => {
@@ -184,7 +175,7 @@ module.exports.editCommentPost = (req, res) => {
       const theComment = docs.comments.find((comment) =>
         comment._id.equals(req.body.commentId)
       );
-      console.log("COMMENT", theComment);
+
       if (!theComment) return res.status(404).send("Comment not found");
       theComment.text = req.body.text;
 

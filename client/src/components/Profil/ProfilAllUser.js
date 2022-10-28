@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import dateParser from "../Utils";
 import { setOneUser } from "../../feature/OneUser.slice";
+import { UidContext } from "../AppContext";
 
 const ProfilAllUser = () => {
   const dispatch = useDispatch();
   /// récupération des paramètre dans l'url
   const params = useParams();
+  const uid = useContext(UidContext);
   console.log(params);
   /// useEffect pour casser un appel axios continue
   /// je récupère ma donnée de la BDD filtré par l'id URL et je la place dans un store redux

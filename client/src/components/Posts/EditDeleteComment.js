@@ -10,12 +10,14 @@ const EditDeleteComment = ({ data, comment, postId }) => {
   const [Text, setText] = useState("");
   const dispatch = useDispatch();
   const uid = useContext(UidContext);
-  const [Admin, setAdmin] = useState(false);
 
   const handleEdit = (e) => {
     e.preventDefault();
     const commentId = comment._id;
     const text = Text;
+
+    /* modification du commentaire */
+
     if (Text) {
       return axios({
         method: "patch",
@@ -27,6 +29,9 @@ const EditDeleteComment = ({ data, comment, postId }) => {
         .then(() => setEdit(false));
     }
   };
+
+  /* suppression du commentaire */
+
   const handleDelete = (e) => {
     const commentId = comment._id;
     return axios({
@@ -39,12 +44,12 @@ const EditDeleteComment = ({ data, comment, postId }) => {
       .then(() => setEdit(false));
   };
 
-  console.log(comment.commenterId);
-  console.log(uid);
+  /* Condition qui vérifie qui fait la demande de modification / suppression */
+  /* Rappel UID est l'id provenant du Token fournis a la connexion de l'utilisateur */
+
   useEffect(() => {
     const checkAuthor = () => {
       if (uid === comment.commenterId || data.admin === true) {
-        setAdmin(true);
         setISAuthor(true);
       }
     };
@@ -53,6 +58,7 @@ const EditDeleteComment = ({ data, comment, postId }) => {
 
   return (
     <div className="edit-comment">
+      {/*affichage ou non selon authorisation  */}
       {IsAuthor && Edit === false && (
         <button onClick={() => setEdit(!Edit)}>
           <img src="./img/editer.png" alt="edit" />

@@ -8,13 +8,15 @@ const UploadImg = () => {
   const [upFile, setUpFile] = useState();
   const userData = useSelector((state) => state.getUsers.getUsers);
   const dispatch = useDispatch();
+
+  /* Affichage de la preview de la photo qui va remplacer l'ancienne   */
   function handleChange(e) {
-    console.log(e.target.files[0]);
     setUpFile(URL.createObjectURL(e.target.files[0]));
   }
 
+  /*Fonction pour modifier la photo de profil et l'enregistrer dans la BDD  */
   const handlePicture = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     const data = new FormData();
     console.log(data);
     console.log(userData.pseudo);
@@ -42,7 +44,7 @@ const UploadImg = () => {
         accept=".jpg,.jpeg,png"
         onChange={(e) => setFile(e.target.files[0])}
       />
-      <img className="img-prev" src={upFile} alt="" />
+      <img className="img-prev" src={upFile} alt="preview-new-picture" />
       <br />
       <input type="submit" value="Envoyer" />
     </form>

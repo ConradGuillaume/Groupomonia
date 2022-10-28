@@ -6,11 +6,11 @@ import { isEmpty } from "../Utils";
 
 const FollowHandler = ({ idToFollow, type }) => {
   const userData = useSelector((state) => state.getUsers.getUsers);
-
   const [isFollowed, setIsFollowed] = useState(false);
   const dispatch = useDispatch();
   const [unFollow, setunFollow] = useState(false);
   const [follow, setfollow] = useState(true);
+  /* le follow est envoyé dans la BDD et dans le store redux */
   const handleFollow = () => {
     axios
       .patch(
@@ -19,15 +19,14 @@ const FollowHandler = ({ idToFollow, type }) => {
       )
       .then((res) => dispatch(setFollowUser(idToFollow)))
       .catch((err) => console.log(err));
-    console.log(idToFollow);
 
     setIsFollowed(true);
   };
-  // console.log(hello);
+
+  /* le UnFollow est envoyé dans la BDD et dans le store redux */
+
   const handleUnfollow = () => {
     const idToUnFollow = idToFollow;
-    console.log(idToUnFollow);
-    console.log(userData._id);
     axios
       .patch(
         `${process.env.REACT_APP_API_URL}api/user/unfollow/${userData._id}`,
@@ -38,6 +37,7 @@ const FollowHandler = ({ idToFollow, type }) => {
     setIsFollowed(true);
   };
 
+  /*Vérifie que userData.FOllowing n'est pas vide alors je lance la fonction   */
   useEffect(() => {
     if (!isEmpty(userData.following.includes(idToFollow))) {
       if (userData.following.includes(idToFollow)) {
@@ -47,12 +47,14 @@ const FollowHandler = ({ idToFollow, type }) => {
   }, [userData, idToFollow]);
   return (
     <>
+      {/* si isFOllowed et si userData n'est pas vie   sont true =>  */}
       {isFollowed && !isEmpty(userData) && (
-        <button
+        <div
           onMouseEnter={() => setunFollow(true) + setfollow(false)}
           onMouseLeave={() => setunFollow(false) + setfollow(true)}
           onClick={handleUnfollow}
         >
+          {/* Type me permet de réutilliser ma fonction follow unfollow dans mon projet sous différents visuel  */}
           {type === "card" && <img src="./img/checked.png" alt="checked" />}
           {type === "suggestion" && follow && (
             <button className="unFollow-btn">Abonné</button>
@@ -60,15 +62,16 @@ const FollowHandler = ({ idToFollow, type }) => {
           {type === "suggestion" && unFollow && (
             <button className="unFollow-btn">désabonné</button>
           )}
-        </button>
+        </div>
       )}
+      {/* si isFOllowed est false  et userData n'est pas vide  => */}
       {isFollowed === false && !isEmpty(userData) && (
-        <button onClick={handleFollow}>
+        <div onClick={handleFollow}>
           {type === "card" && <img src="./img/unchecked.png" alt="unchecked" />}
           {type === "suggestion" && (
             <button className="follow-btn">Suivre</button>
           )}
-        </button>
+        </div>
       )}
     </>
   );

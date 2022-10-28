@@ -1,15 +1,13 @@
-import React from "react";
-import LeftNav from "../components/LeftNav";
+import React, { useContext } from "react";
+import { UidContext } from "../components/AppContext";
+import Log from "../components/log";
 import ProfilAllUser from "../components/Profil/ProfilAllUser";
-import { UserProvider } from "../components/Posts/Card";
-import { useParams } from "react-router-dom";
 
 const ProfilPublic = () => {
+  const uid = useContext(UidContext);
   return (
     <>
-      <div>
-        <ProfilAllUser />
-      </div>
+      <div>{uid && <ProfilAllUser />}</div>
     </>
   );
 };

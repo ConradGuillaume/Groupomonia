@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, setAllPosts } from "../../feature/Posts.slice";
+import { setAllPosts } from "../../feature/Posts.slice";
 import { timestampParser } from "../Utils";
 import EditDeleteComment from "./EditDeleteComment";
 
 const CardComment = ({ post }) => {
   const [Text, setText] = useState("");
   const dispatch = useDispatch();
+  /* Récupération data provenant du store redux */
   const usersData = useSelector((state) => state.allUsers.users);
   const userData = useSelector((state) => state.getUsers.getUsers);
 
@@ -19,11 +20,6 @@ const CardComment = ({ post }) => {
     console.log(text);
     console.log(userData.pseudo);
     const commenterPseudo = userData.pseudo;
-    const data = {
-      commenterId: userData._id,
-      commenterPseudo: userData.pseudo,
-      text: Text,
-    };
 
     if (Text) {
       await axios({
@@ -31,6 +27,7 @@ const CardComment = ({ post }) => {
         url: `${process.env.REACT_APP_API_URL}api/post/comment-post/${postId}`,
         data: { commenterId, text, commenterPseudo },
       }).then(() => setText(""));
+      /* Mise a jour de la data modifié*/
       return await axios
         .get(`${process.env.REACT_APP_API_URL}api/post`)
         .then((res) => dispatch(setAllPosts(res.data)));
@@ -40,6 +37,9 @@ const CardComment = ({ post }) => {
   return (
     <div className="comments-container">
       {post.comments.map((comment) => {
+        {
+          /* Récupération des commentaires du post*/
+        }
         return (
           <div
             className={

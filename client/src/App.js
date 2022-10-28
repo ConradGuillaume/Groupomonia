@@ -8,9 +8,11 @@ import { setAllPosts } from "./feature/Posts.slice";
 import { setUsers } from "./feature/users.slice";
 
 const App = () => {
+  /* l'id utilisateur est placé dans un useContext pour être réutiliser par la suite  */
   const [uid, SetUid] = useState(null);
   const dispatch = useDispatch();
 
+  /* Controle le token de l'utilisateur  */
   useEffect(() => {
     const fetchToken = async () => {
       await axios({
@@ -19,9 +21,12 @@ const App = () => {
         withCredentials: true,
       })
         .then((res) => {
+          /* récupère l'id utilisateur et le place dans la const uid */
           SetUid(res.data);
         })
-        .catch((err) => console.log("no token"));
+        .catch((err) => {
+          console.log("no token");
+        });
     };
     fetchToken();
     if (uid) {

@@ -8,6 +8,10 @@ import { setAllPosts } from "../feature/Posts.slice";
 const Thread = () => {
   const [LoadPost, setLoadPost] = useState(true);
   const [Count, setCount] = useState(5);
+  const Posts = useSelector((state) => state.allPosts.posts);
+  const dispatch = useDispatch();
+
+  /* Fonction qui va donner l'ordre a la BDD d'envoyer 5 post en plus en arrivant en bas de la barre de scroll */
   const loadMore = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >
@@ -16,8 +20,9 @@ const Thread = () => {
       setLoadPost(true);
     }
   };
-  const Posts = useSelector((state) => state.allPosts.posts);
-  const dispatch = useDispatch();
+
+  /* envoie de la requête de 5 post supplémentaire 
+  puis mise à jour du store Redux */
   useEffect(() => {
     if (LoadPost) {
       axios
@@ -35,6 +40,7 @@ const Thread = () => {
 
   return (
     <div className="thread-container">
+      {/* MAP des posts pour afficher dans le fil d'actualité   */}
       <ul>
         {!isEmpty(Posts) &&
           Posts.map((post) => {

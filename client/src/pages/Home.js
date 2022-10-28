@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UidContext } from "../components/AppContext";
 import NewPostForm from "../components/Posts/NewPostForm";
 import UserFriend from "../components/Profil/UserFriend";
@@ -8,14 +8,16 @@ const Home = () => {
   const uid = useContext(UidContext);
 
   return (
-    <div className="home">
-      <div className="main">
-        <div className="home-header"></div>
-        {uid && <NewPostForm />}
-        {uid && <Thread />}
-        {uid && <UserFriend />}
+    uid && (
+      <div className="home">
+        <div className="main">
+          <div className="home-header"></div>
+          {uid && <NewPostForm />}
+          {uid && <Thread />}
+          {uid && <UserFriend />}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

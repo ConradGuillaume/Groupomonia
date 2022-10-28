@@ -7,14 +7,11 @@ const ModifiedCardImage = ({ post }) => {
   const [upFile, setUpFile] = useState();
   const userData = useSelector((state) => state.getUsers.getUsers);
   function handleChange(e) {
-    console.log(e.target.files[0]);
     setUpFile(URL.createObjectURL(e.target.files[0]));
   }
 
   const handlePicture = (e) => {
     const data = new FormData();
-    console.log(data);
-    console.log(userData.pseudo);
     data.append("name", userData.pseudo);
     data.append("userId", userData._id);
     data.append("file", file);
