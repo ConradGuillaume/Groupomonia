@@ -7,7 +7,7 @@
     background: $color-2;
     padding-bottom: 100px;
     min-height: 800px;
-    @media screen and(max-width: 1000px) {
+    @media(max-width: 1000px) {
       margin-top: 8%;
     }
 
@@ -44,7 +44,7 @@
       padding-top: 20px;
       justify-content: center;
       align-items: center;
-      @media screen and(max-width: 600px) {
+      @media (max-width: 600px) {
         margin: 0;
         margin-top: 20px;
         margin-bottom: 20px;
@@ -59,11 +59,11 @@
       flex-direction: column;
       width: 50%;
       border-radius: 45px;
-      @media screen and(max-width: 1000px) {
+      @media (max-width: 1000px) {
         width: 100%;
         margin-bottom: 5%;
       }
-      @media screen and(max-width: 600px) {
+      @media (max-width: 600px) {
         width: 100%;
       }
       .profil-update {
@@ -113,7 +113,7 @@
     .update-container {
       display: flex;
       width: 100%;
-      @media screen and(max-width: 1000px) {
+      @media (max-width: 1000px) {
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -166,10 +166,10 @@
     display: flex;
     justify-content: center;
     width: 50%;
-    @media screen and(max-width: 600px) {
+    @media (max-width: 600px) {
       width: 100%;
     }
-    @media screen and(max-width: 1000px) {
+    @media (max-width: 1000px) {
       width: 100%;
     }
 
@@ -183,7 +183,7 @@
       width: 80%;
       max-height: 550px;
       box-shadow: 0px 0px 4px 5px white;
-      @media screen and(max-width: 1000px) {
+      @media (max-width: 1000px) {
         justify-content: center;
       }
 
@@ -225,7 +225,7 @@
       margin-top: -20px;
       border-radius: 15px 5px 15px 15px;
       font-size: 18px;
-      @media screen and(max-width: 1000px) {
+      @media (max-width: 1000px) {
         margin-top: 0%;
         left: 20%;
       }
@@ -256,7 +256,7 @@
     margin-left: 35%;
     border-radius: 20px 20px 20px 20px;
     height: 50px;
-    @media screen and(max-width: 1000px) {
+    @media (max-width: 1000px) {
       margin-top: 15px;
       margin-bottom: 15px;
       margin-left: 0%;
@@ -296,7 +296,7 @@
       transform: scaleY(0);
       transform-origin: center;
       animation: modal 0.5s forwards;
-      @media screen and(max-width: 600px) {
+      @media (max-width: 600px) {
         width: 100%;
       }
 
@@ -347,7 +347,7 @@
         align-items: center;
         margin: 10px;
         margin-right: 25px;
-        @media screen and(max-width: 600px) {
+        @media (max-width: 600px) {
           flex-direction: column;
         }
 
@@ -362,7 +362,7 @@
           margin-left: 8px;
           text-align: left;
           min-width: 250px;
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             text-align: center;
           }
         }

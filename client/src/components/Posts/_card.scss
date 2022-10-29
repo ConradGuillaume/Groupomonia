@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    @media screen and(max-width: 600px) {
+    @media (max-width: 600px) {
       margin: 0%;
     }
   }
@@ -39,7 +39,7 @@
     margin: 2% 0% 0% 0%;
     position: relative;
 
-    @media screen and(max-width: 600px) {
+    @media (max-width: 600px) {
       padding: 0;
       margin: 0;
       margin-bottom: 2%;
@@ -67,14 +67,14 @@
         box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
         object-fit: cover;
 
-        @media screen and(max-width: 600px) {
+        @media (max-width: 600px) {
           margin: 0%;
           height: 50px;
           width: 50px;
           border-radius: 14px;
         }
       }
-      @media screen and(max-width: 590px) {
+      @media (max-width: 590px) {
         position: absolute;
         transform: translate(17px, 18px);
       }
@@ -86,7 +86,7 @@
     }
 
     .card-right {
-      @media screen and(max-width: 600px) {
+      @media (max-width: 600px) {
         background: #ddc3a5d5;
         width: 100%;
       }
@@ -96,7 +96,7 @@
         margin: 2px 0 4px;
         min-height: 35px;
 
-        @media screen and(max-width: 600px) {
+        @media (max-width: 600px) {
           margin: 0;
           height: 100px;
         }
@@ -107,7 +107,7 @@
           justify-content: space-between;
           margin-left: 2%;
 
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             margin-left: 70px;
           }
           img {
@@ -120,7 +120,7 @@
             &:hover {
               transform: scale(1.2) translate(0px, 0px);
             }
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               height: 25px;
               width: 25px;
             }
@@ -139,7 +139,7 @@
               border-bottom: 2px solid $color-2;
             }
 
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               margin: 0px 0 -10px;
               padding: 0;
             }
@@ -162,7 +162,7 @@
           right: 0%;
           top: 0%;
 
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             color: $color-2;
             font-weight: 900;
           }
@@ -176,7 +176,7 @@
         padding-bottom: 2%;
         font-size: 1.1rem;
 
-        @media screen and(max-width: 440px) {
+        @media (max-width: 440px) {
           margin-top: -18px;
         }
       }
@@ -339,7 +339,7 @@
         margin: 0px 10px 20px 10px;
         box-shadow: 3px 3px 4px 2px #201e20;
         span {
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             position: relative;
             margin-right: 10px;
             height: 100%;
@@ -374,7 +374,7 @@
               margin-top: 10%;
               margin-bottom: 10%;
             }
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               margin-bottom: 10px;
             }
           }
@@ -384,7 +384,7 @@
           justify-content: space-around;
           width: 100%;
           margin: 0px;
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             display: flex;
             margin-bottom: 15px;
           }
@@ -400,7 +400,7 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
             margin-left: 15px;
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               border: 2px solid;
               margin-bottom: 0px;
               width: 100%;
@@ -412,7 +412,7 @@
             align-items: center;
             justify-content: center;
 
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               display: flex;
               justify-content: center;
               width: 40px;
@@ -425,7 +425,7 @@
               margin-right: 5px;
               position: inherit;
               background: transparent;
-              @media screen and(max-width: 600px) {
+              @media (max-width: 600px) {
                 position: relative;
                 width: auto;
                 left: 0%;
@@ -448,7 +448,7 @@
                 height: 80px;
                 padding-right: 5px;
                 padding-left: 5px;
-                @media screen and(max-width: 600px) {
+                @media (max-width: 600px) {
                   border: solid 2px;
                   margin: 0;
                   height: 50px;
@@ -503,7 +503,7 @@
           margin-right: 5%;
           top: 0%;
 
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             position: relative;
             margin-right: 10px;
             height: 100%;
@@ -528,7 +528,7 @@
             display: flex;
             flex-direction: column;
             margin-left: 2%;
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               margin-bottom: 10px;
             }
           }
@@ -555,7 +555,7 @@
           justify-content: space-around;
           width: 100%;
           margin: 0px;
-          @media screen and(max-width: 600px) {
+          @media (max-width: 600px) {
             display: flex;
             margin-bottom: 15px;
           }
@@ -571,7 +571,7 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
             margin-left: 15px;
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               border: 2px solid;
               margin-bottom: 0px;
               width: 100%;
@@ -583,7 +583,7 @@
             align-items: center;
             justify-content: center;
 
-            @media screen and(max-width: 600px) {
+            @media (max-width: 600px) {
               display: flex;
               justify-content: center;
               width: 40px;
@@ -596,7 +596,7 @@
               margin-right: 5px;
               position: inherit;
               background: transparent;
-              @media screen and(max-width: 600px) {
+              @media (max-width: 600px) {
                 position: relative;
                 width: auto;
                 left: 0%;
@@ -619,7 +619,7 @@
                 height: 80px;
                 padding-right: 5px;
                 padding-left: 5px;
-                @media screen and(max-width: 600px) {
+                @media (max-width: 600px) {
                   border: solid 2px;
                   margin: 0;
                   height: 50px;

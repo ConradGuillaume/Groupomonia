@@ -8,14 +8,14 @@
   width: 100%;
   margin-left: 4%;
   margin-right: 33%;
-  @media screen and(max-width :1135px) {
+  @media (max-width :1135px) {
     margin: 50px;
     margin-top: 50px;
 
     width: 100%;
   }
 
-  @media screen and(max-width: 600px) {
+  @media (max-width: 600px) {
     margin: 0;
     margin-top: 20%;
     margin-bottom: 20px;
@@ -53,10 +53,10 @@
     right: 42px;
     text-align: right;
 
-    @media screen and(max-width: 420px) {
+    @media (max-width: 420px) {
       right: 10px;
     }
-    @media screen and(max-width: 380px) {
+    @media (max-width: 380px) {
       display: none;
     }
 
@@ -101,36 +101,36 @@
         text-align: left;
         margin-right: 15px;
         img {
-          @media screen and(max-width: 590px) {
+          @media (max-width: 590px) {
             margin-left: 0;
           }
         }
       }
       .card-right {
-        @media screen and(max-width: 590px) {
+        @media (max-width: 590px) {
           margin-left: 0;
         }
         .card-header {
-          @media screen and(max-width: 632px) {
+          @media (max-width: 632px) {
             flex-direction: column;
           }
-          @media screen and(max-width: 590px) {
+          @media (max-width: 590px) {
             margin: 0;
           }
           .pseudo {
-            @media screen and(max-width: 440px) {
+            @media (max-width: 440px) {
               transform: translateY(-8px);
             }
           }
           span {
-            @media screen and(max-width: 632px) {
+            @media (max-width: 632px) {
               position: absolute;
               top: 40px;
             }
-            @media screen and(max-width: 590px) {
+            @media (max-width: 590px) {
               left: 68px;
             }
-            @media screen and(max-width: 440px) {
+            @media (max-width: 440px) {
               left: 14px;
               top: 60px;
             }
@@ -223,7 +223,7 @@
           }
         }
         button {
-          @media screen and(max-width: 460px) {
+          @media (max-width: 460px) {
             font-size: 0.8rem;
             padding: 8px;
           }
