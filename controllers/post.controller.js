@@ -41,7 +41,7 @@ module.exports.updatePost = async (req, res, next) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   if (req.file) {
-    PostModel.findOne({ _id: req.params.id })
+    await PostModel.findOne({ _id: req.params.id })
       .then((post) => {
         if (post.picture) {
           const filename = post.picture.split("/images/")[1];

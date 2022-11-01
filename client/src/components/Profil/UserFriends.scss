@@ -8,7 +8,7 @@
   margin-bottom: 50px;
   right: 3%;
   top: 50px;
-  @media (max-width :1135px) {
+  @media (max-width: 1135px) {
     display: none;
   }
   ::-webkit-scrollbar {
@@ -50,7 +50,7 @@
 
     .connected {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: 10px;
       width: 90%;
@@ -63,7 +63,7 @@
     }
     .disconnected {
       display: flex;
-      text-align: start;
+      text-align: flex-start;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;

@@ -22,7 +22,7 @@ module.exports.updateUser = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   if (req.file) {
-    UserModel.findOne({ _id: req.params.id })
+    await UserModel.findOne({ _id: req.params.id })
       .then((user) => {
         if (user.picture !== "./uploads/profil/random-user.png") {
           const filename = user.picture.split("/images/")[1];
@@ -36,12 +36,12 @@ module.exports.updateUser = async (req, res) => {
   }
   const userObject = req.file
     ? {
+        ...req.body,
         picture: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
-
   UserModel.updateOne(
     { _id: req.params.id },
     { ...userObject, _id: req.params.id },
@@ -51,8 +51,10 @@ module.exports.updateUser = async (req, res) => {
       },
     }
   )
+
     .then(() => res.status(200).json({ message: "User updated" }))
     .catch((error) => res.status(400).json({ error }));
+  console.log("je termine là ");
 };
 
 module.exports.deleteUser = (req, res) => {
