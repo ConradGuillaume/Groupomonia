@@ -16,8 +16,6 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 module.exports.updateUser = async (req, res) => {
-
-
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -56,7 +54,9 @@ module.exports.updateUser = async (req, res) => {
     .catch((error) => res.status(400).json({ error }));
   console.log("je termine là ");
 };
-// fonctionnelle avec Postman mais n'est pas implémenté dans le projet à ce stade du dévelloppement 
+// fonction à revoir  n'est pas implémenté dans le projet à ce stade du dévelloppement car la supression d'un user demande a ce que les posts 
+//les commentaires, les follows , les likes soient traités en même temps 
+/*
 module.exports.deleteUser = (req, res) => {
   UserModel.findOne({ _id: req.params.id }).then((user) => {
     const filename = user.picture.split("/images")[1];
@@ -74,7 +74,7 @@ module.exports.deleteUser = (req, res) => {
     }
   });
 };
-
+*/
 module.exports.follow = (req, res) => {
   if (
     !ObjectId.isValid(req.params.id) ||
