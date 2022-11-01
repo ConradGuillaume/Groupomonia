@@ -16,7 +16,7 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 module.exports.updateUser = async (req, res) => {
-  ////////////////////////////////////////////////////////////////////////////////////////////////////// gerer les images !!!!!!!
+
 
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -56,7 +56,7 @@ module.exports.updateUser = async (req, res) => {
     .catch((error) => res.status(400).json({ error }));
   console.log("je termine là ");
 };
-
+// fonctionnelle avec Postman mais n'est pas implémenté dans le projet à ce stade du dévelloppement 
 module.exports.deleteUser = (req, res) => {
   UserModel.findOne({ _id: req.params.id }).then((user) => {
     const filename = user.picture.split("/images")[1];
@@ -69,7 +69,6 @@ module.exports.deleteUser = (req, res) => {
         })
         .catch((error) => res.status(400).json({ error }));
     });
-    // }
     if (!user) {
       res.status(404).json({ message: "No user to delete" });
     }
@@ -94,7 +93,7 @@ module.exports.follow = (req, res) => {
         else return res.status(400).json(err);
       }
     );
-    // add to following list//////////////////////////////////////////////////////////////////////////à Revoir
+    // add to following list
     UserModel.findByIdAndUpdate(
       req.body.idToFollow,
       { $addToSet: { followers: req.params.id } },

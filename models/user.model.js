@@ -51,6 +51,8 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// hash password avec bcrypt + sel , avant sauvegarde  dans dataBase
 userSchema.plugin(uniqueValidator);
 
 userSchema.pre("save", async function (next) {

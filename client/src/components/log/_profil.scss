@@ -37,7 +37,7 @@
         &:hover {
           transition: 0.8s;
           transform: translateX(-3px);
-          color: white;
+          color: white !important;
           background: $color-2;
         }
       }
@@ -70,6 +70,9 @@
       &:focus {
         border: 2px inset $color-3;
         box-shadow: none;
+      }
+      &:hover {
+        background: $color-3;
       }
     }
   }

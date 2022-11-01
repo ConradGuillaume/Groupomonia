@@ -1,15 +1,15 @@
-const express = require("express");
+const express = require("express"); // framework node.js  https://www.npmjs.com/package/express
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-require("dotenv").config({ path: "./config/.env" });
+const bodyParser = require("body-parser"); // body parsing   https://www.npmjs.com/package/body-parser
+const cookieParser = require("cookie-parser"); // cookies parsing  https://www.npmjs.com/package/cookie-parser
+require("dotenv").config({ path: "./config/.env" }); // variable d'environnement  https://www.npmjs.com/package/dotenv
 require("./config/db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const helmet = require("helmet");
+const helmet = require("helmet"); // hide API stacks in browser  https://www.npmjs.com/package/helmet
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -25,10 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//JWT
+//Token avec l'id utilisateur
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
-  //console.log("RES LOCALS", res.locals.user._id);
   res.status(200).send(res.locals.user._conditions._id);
 });
 // routes
@@ -39,5 +38,5 @@ app.use("/api/post", postRoutes);
 //server
 
 app.listen(process.env.PORT, () => {
-  // console.log(`listening on port ${process.env.PORT}`);
+  console.log(`listening on port ${process.env.PORT}`);
 });

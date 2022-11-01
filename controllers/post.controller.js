@@ -3,7 +3,7 @@ const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 
-module.exports.readPosts = (req, res, next) => {
+module.exports.readPosts = (req, res) => {
   const post = req.query.p || 5;
 
   PostModel.find()
@@ -32,11 +32,11 @@ module.exports.createPost = async (req, res) => {
     const post = await newPost.save();
     return res.status(201).json(post);
   } catch (err) {
-    return res.status(400).send(err); //////////  à  vérifier send ///////////////////////////////////////
+    return res.status(400).send(err);
   }
 };
 
-module.exports.updatePost = async (req, res, next) => {
+module.exports.updatePost = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -85,7 +85,7 @@ module.exports.deletePost = (req, res) => {
   });
 };
 
-module.exports.likePost = (req, res, next) => {
+module.exports.likePost = (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   try {

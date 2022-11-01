@@ -64,8 +64,8 @@ button {
   border-radius: 20px;
   cursor: pointer;
   &:focus {
-    border: 6px solid black;
-    transform: scale(1.1);
+    border: 2px solid black;
+    transform: scale(1.05);
   }
 }
 
