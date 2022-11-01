@@ -18,11 +18,11 @@ const Navbar = () => {
             </div>
           </NavLink>
         </div>
-        {uid && userData ? (
+        {uid && userData && (
           <ul className="user-nav">
             <li className="welcome">
               <NavLink className="navigate" to="/profil">
-                <span id="welcome-user">Bienvenue {userData.pseudo} </span>
+                <span id="welcome-user"> {userData.pseudo} </span>
               </NavLink>
             </li>
             <div className="logo-container">
@@ -39,18 +39,8 @@ const Navbar = () => {
               <Logout />
             </div>
           </ul>
-        ) : (
-          <ul>
-            <li></li>
-            <li>
-              <NavLink to="/profil">
-                <img src="./img/logout.png" alt="login" />
-              </NavLink>
-            </li>
-          </ul>
         )}
       </div>
-      
     </nav>
   );
 };

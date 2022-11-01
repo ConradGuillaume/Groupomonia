@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import dateParser from "../Utils";
 import { setOneUser } from "../../feature/OneUser.slice";
-import { UidContext } from "../AppContext";
 
 const ProfilAllUser = () => {
   const dispatch = useDispatch();
   /// récupération des paramètre dans l'url
   const params = useParams();
-  const uid = useContext(UidContext);
-  console.log(params);
+
   /// useEffect pour casser un appel axios continue
   /// je récupère ma donnée de la BDD filtré par l'id URL et je la place dans un store redux
   useEffect(() => {
@@ -27,7 +25,7 @@ const ProfilAllUser = () => {
           }
         });
     }
-  }, []);
+  },[]);
   /// je récupère la donné de l'utilisateur et je l'applique
   const OneUser = useSelector((state) => state.getOneUser.getOneUser);
 
@@ -35,7 +33,7 @@ const ProfilAllUser = () => {
     return (
       <>
         <div className="profil-container">
-          <h1></h1>
+          <h1>Profil de {OneUser.pseudo} </h1>
           <div className="update-container">
             <div className="left-part">
               <div className="profil-update">

@@ -30,4 +30,5 @@ export const {
   editBio,
   setFollowUser,
   setUnFollowUser,
+  uploadPicture,
 } = getUsers.actions;

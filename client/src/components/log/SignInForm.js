@@ -18,7 +18,7 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        if (res) window.location = "/home";
+        if (res) window.location = "/profil";
       })
       //Gestion des erreur en Front et en back
       .catch((err) => {

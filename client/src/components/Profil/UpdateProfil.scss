@@ -7,7 +7,7 @@
     background: $color-2;
     padding-bottom: 100px;
     min-height: 800px;
-    @media(max-width: 1000px) {
+    @media (max-width: 1000px) {
       margin-top: 8%;
     }
 
@@ -120,11 +120,7 @@
       }
     }
   }
-  #file {
-    border: 25px red;
-    justify-content: center;
-    display: none;
-  }
+
   #upload-form {
     background: $color-1;
     padding: 10px;
@@ -141,7 +137,7 @@
       object-fit: contain;
     }
 
-    label {
+    .hello {
       color: white;
       padding: 5px;
       font-size: 18px;
@@ -154,11 +150,30 @@
       display: flex;
       justify-content: center;
       transition: 1s;
+      z-index: 1;
       &:hover {
         border: 1px solid $color-2;
         color: $color-2;
         background: $color-1;
         transform: scale(1.02);
+      }
+      &-btn {
+        position: absolute;
+        color: white;
+        padding: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 25px;
+        margin-bottom: 25px;
+        margin-top: 20px;
+        width: 165px;
+        height: 32px;
+        z-index: 0;
+        &:focus {
+          border: 2px inset $color-2;
+          background: $color-2;
+          transform: scale(1.1);
+        }
       }
     }
   }

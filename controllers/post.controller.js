@@ -66,7 +66,7 @@ module.exports.updatePost = async (req, res, next) => {
     { ...postObject, _id: req.params.id },
     { $set: { message: req.body.message } }
   )
-    .then(() => res.status(200).json({ message: "Modified message" }))
+    .then(() => res.status(200).json({ message: "Modified " }))
     .catch((error) => res.status(400).json({ error }));
 };
 

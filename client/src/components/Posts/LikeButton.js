@@ -20,7 +20,6 @@ const LikeButton = ({ post }) => {
       })
       .then((res) => {
         dispatch(likePost({ postId, userId }));
-        console.log(res);
       })
       .catch((err) => console.log(err));
     setLiked(true);
@@ -37,7 +36,6 @@ const LikeButton = ({ post }) => {
         }
       )
       .then((res) => {
-        console.log(res);
         dispatch(unLikePost({ postId, userId }));
       })
       .catch((err) => console.log(err));

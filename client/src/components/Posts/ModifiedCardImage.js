@@ -18,7 +18,6 @@ const ModifiedCardImage = ({ post }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}api/post/${userData._id}`, data)
       .then((res) => {
-        console.log(res);
       });
   };
 

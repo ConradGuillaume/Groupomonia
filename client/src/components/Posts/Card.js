@@ -29,6 +29,9 @@ const Card = ({ post }) => {
   function handleChange(e) {
     setUpFile(URL.createObjectURL(e.target.files[0]));
   }
+  if (TextUpdate === null) {
+    setTextUpdate(post.message);
+  }
 
   const updateItem = async (e) => {
     e.preventDefault();
@@ -55,6 +58,7 @@ const Card = ({ post }) => {
 
     setIsUpdated(false);
   };
+
   // isEmpty est une fonction dans Utils qui permet de vérifier si la data est présente
   //useEffect ici vérifie si la data est présente et met fin au spinner loading
   useEffect(() => {

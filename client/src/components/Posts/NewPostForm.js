@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { isEmpty, timestampParser } from "../Utils";
 import axios from "axios";
-import { addPost, setAllPosts } from "../../feature/Posts.slice";
+import { setAllPosts } from "../../feature/Posts.slice";
 
 const NewPostForm = () => {
   const [IsLoading, setIsLoading] = useState(true);
@@ -90,7 +90,7 @@ const NewPostForm = () => {
           {/*Redirection vers le profil personnel  de l'utilisateur  */}
           <NavLink className="tab" tabIndex="1" to="/profil">
             <div className="user-info">
-              <img src={userData.picture} alt="user-picture" tabIndex="" />
+              <img src={userData.picture} alt="upload" tabIndex="" />
             </div>
           </NavLink>
           <div className="post-form">
@@ -115,7 +115,7 @@ const NewPostForm = () => {
                   </div>
                   <div className="content">
                     <p>{Message}</p>
-                    <img src={PostPicture} alt="Post-picture" />
+                    <img src={PostPicture} alt="upload" />
                     {Video && (
                       <iframe
                         src={Video}
@@ -133,7 +133,7 @@ const NewPostForm = () => {
               <div className="icon">
                 {isEmpty(Video) && (
                   <>
-                    <img src="./img/image.png" alt="picture" />
+                    <img src="./img/image.png" alt="load" />
                     <input
                       type="file"
                       id="file-upload"

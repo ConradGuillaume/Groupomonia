@@ -19,14 +19,15 @@ const Log = (props) => {
   return (
     <div className="connection-form">
       <div className="form-container">
-        <ul>
-          <li onClick={handleModals} id="register">
+        <div className="btn-contain">
+          <button onClick={handleModals} className="btn" id="register">
             s'inscrire
-          </li>
-          <li onClick={handleModals} id="login">
+          </button>
+
+          <button onClick={handleModals} className="btn" id="login">
             se connecter
-          </li>
-        </ul>
+          </button>
+        </div>
         {signUpModal && <SignUpForm />}
         {signInModal && <SignInForm />}
       </div>

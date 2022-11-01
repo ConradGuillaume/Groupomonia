@@ -9,6 +9,7 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const app = express();
 const cors = require("cors");
 const path = require("path");
+const helmet = require("helmet");
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -32,10 +33,11 @@ app.get("/jwtid", requireAuth, (req, res) => {
 });
 // routes
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 //server
 
 app.listen(process.env.PORT, () => {
- // console.log(`listening on port ${process.env.PORT}`);
+  // console.log(`listening on port ${process.env.PORT}`);
 });

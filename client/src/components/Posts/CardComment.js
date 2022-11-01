@@ -17,8 +17,6 @@ const CardComment = ({ post }) => {
     const commenterId = userData._id;
     const text = Text;
     const postId = post._id;
-    console.log(text);
-    console.log(userData.pseudo);
     const commenterPseudo = userData.pseudo;
 
     if (Text) {
@@ -37,9 +35,7 @@ const CardComment = ({ post }) => {
   return (
     <div className="comments-container">
       {post.comments.map((comment) => {
-        {
-          /* Récupération des commentaires du post*/
-        }
+        /* Récupération des commentaires du post*/
         return (
           <div
             className={

@@ -3,23 +3,32 @@
   justify-content: center;
 
   padding: 20px 0px 20px 0px;
+  @media (max-width: 600px) {
+    padding: 0;
+  }
   .form-container {
     background: $color-1;
     border-radius: 15px;
     padding: 8px 80px 8px 80px;
     box-shadow: 1px 1px 7px 4px $color-2;
-
-    ul {
+    @media (max-width: 600px) {
+      border-radius: 15px;
+      padding: 0;
+    }
+    .btn-contain {
       display: flex;
       justify-content: space-around;
       padding: 20px 0px 20px 0px;
-
+      @media (max-width: 600px) {
+        border-radius: 15px;
+      }
       background: $color-1;
-      li {
+      .btn {
         border-radius: 25px;
         cursor: pointer;
+        color: $color-2 !important;
         padding: 10px;
-        width: 130px;
+        width: 150px;
         font-weight: 600;
         text-align: center;
         background: $color-3;
@@ -33,7 +42,11 @@
         }
       }
     }
+
     #sign-up-form {
+      @media (max-width: 600px) {
+        padding: 5px;
+      }
       padding: 20px;
       label {
         display: flex;
@@ -41,11 +54,11 @@
         font-weight: 600;
         background: $color-1;
         color: $color-2;
-        padding: 9px 0;
         z-index: 10;
         cursor: pointer;
       }
     }
+
     input {
       padding: 14px 20px;
       margin: 0;
@@ -60,13 +73,7 @@
       }
     }
   }
-  input[type="submit"] {
-    margin-top: 25px;
 
-    &:focus {
-      border: none;
-    }
-  }
   .error {
     margin-top: 15px;
     width: 300px;

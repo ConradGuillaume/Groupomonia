@@ -40,7 +40,11 @@ const UpdateProfil = () => {
               <img id="user-pic" src={userData.picture} alt="user-pic" />
               <button
                 onClick={() => {
-                  setupdateImg(true);
+                  if (updateImg === false) {
+                    setupdateImg(true);
+                  } else {
+                    setupdateImg(false);
+                  }
                 }}
                 className="modify-picture"
                 tabIndex={0}
@@ -117,6 +121,7 @@ const UpdateProfil = () => {
                         </li>
                       );
                     }
+                  return null;
                 })}
               </ul>
             </div>
@@ -146,6 +151,7 @@ const UpdateProfil = () => {
                         </li>
                       );
                     }
+                  return null;
                 })}
               </ul>
             </div>
