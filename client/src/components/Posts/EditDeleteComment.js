@@ -54,7 +54,7 @@ const EditDeleteComment = ({ data, comment, postId }) => {
       }
     };
     checkAuthor();
-  }, [uid, comment.commenterId, data.admin, true]);
+  });
 
   return (
     <div className="edit-comment">

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UidContext } from "../components/AppContext";
-import Log from "../components/log";
 import ProfilAllUser from "../components/Profil/ProfilAllUser";
 
 const ProfilPublic = () => {

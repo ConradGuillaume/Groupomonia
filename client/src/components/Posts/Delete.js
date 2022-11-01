@@ -10,7 +10,6 @@ const Delete = (props) => {
   return (
     <button
       tabIndex="0"
-      role="button"
       onClick={() => {
         if (window.confirm("Voulez-vous supprimer cet article ?")) {
           axios

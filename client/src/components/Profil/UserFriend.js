@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { UidContext } from "../AppContext";
 import FollowHandler from "./FollowHandler";
@@ -14,6 +14,7 @@ const UserFriend = () => {
     <div className="container">
       <div className=" date-bis">
         <iframe
+          title="clock"
           className="date"
           width="280"
           height="158"
@@ -42,7 +43,7 @@ const UserFriend = () => {
                 </li>
               );
             }
-            //}
+            return null;
           })}
         </ul>
       )}
