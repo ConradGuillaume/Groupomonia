@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="logo">
           <NavLink className="navigate" to="/" tabIndex={0}>
             <div className="logo">
-              <h3>Groupomania</h3>
+              <img src="/img/groupomonia-black.png" alt="" />
             </div>
           </NavLink>
         </div>
