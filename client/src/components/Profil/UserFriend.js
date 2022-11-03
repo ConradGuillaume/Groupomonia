@@ -35,7 +35,7 @@ const UserFriend = () => {
             if (data) {
               return (
                 <li key={index} className={className}>
-                  <img src={user.picture} alt="pic" />
+                  <img src={user.picture} alt="" />
                   <h4>{user.pseudo}</h4>
                   {uid !== user._id && (
                     <FollowHandler idToFollow={user._id} type={"suggestion"} />

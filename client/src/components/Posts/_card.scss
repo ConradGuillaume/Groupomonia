@@ -156,9 +156,10 @@
         .timeStamp {
           font-style: italic;
           font-family: $font-1;
-          color: white;
+          color: $color-4;
+          filter: brightness(100%);
           position: absolute;
-          padding-right: 5%;
+          padding-right: 2%;
           right: 0%;
           top: 0%;
 

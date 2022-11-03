@@ -57,7 +57,7 @@ export const allPosts = createSlice({
               return comment;
             }
           }));
-        } // else return posts;
+        } else return posts;
       });
     },
     deleteComment: (state, action) => {

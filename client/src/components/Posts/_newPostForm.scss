@@ -8,11 +8,14 @@
   width: 100%;
   margin-left: 4%;
   margin-right: 33%;
-  @media (max-width :1135px) {
+  @media (max-width: 1135px) {
     margin: 50px;
     margin-top: 50px;
 
     width: 100%;
+  }
+  label {
+    visibility: hidden;
   }
 
   @media (max-width: 600px) {

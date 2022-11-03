@@ -46,7 +46,7 @@ const App = () => {
         dispatch(setUsers(res.data));
       });
     }
-  }, [uid]);
+  }, [uid, dispatch]);
 
   return (
     <UidContext.Provider value={uid}>

@@ -81,7 +81,10 @@ const Card = ({ post }) => {
                     tabIndex="0"
                     src={usersData
                       .map((user) => {
-                        if (user._id === post.posterId) return user.picture;
+                        if (user._id === post.posterId) {
+                          return user.picture;
+                        }
+                        return null;
                       })
                       .join("")}
                     alt="poster-pic"

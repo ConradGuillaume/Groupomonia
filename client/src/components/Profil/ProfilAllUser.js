@@ -25,7 +25,7 @@ const ProfilAllUser = () => {
           }
         });
     }
-  },[]);
+  });
   /// je récupère la donné de l'utilisateur et je l'applique
   const OneUser = useSelector((state) => state.getOneUser.getOneUser);
 

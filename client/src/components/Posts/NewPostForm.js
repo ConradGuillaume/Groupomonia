@@ -88,12 +88,13 @@ const NewPostForm = () => {
             </p>
           </div>
           {/*Redirection vers le profil personnel  de l'utilisateur  */}
-          <NavLink className="tab" tabIndex="1" to="/profil">
+          <NavLink className="tab" tabIndex="0" to="/profil">
             <div className="user-info">
-              <img src={userData.picture} alt="upload" tabIndex="" />
+              <img src={userData.picture} alt="upload"  />
             </div>
           </NavLink>
           <div className="post-form">
+            <label htmlFor="message">message:</label>
             <textarea
               name="message"
               id="message"
@@ -133,7 +134,8 @@ const NewPostForm = () => {
               <div className="icon">
                 {isEmpty(Video) && (
                   <>
-                    <img src="./img/image.png" alt="load" />
+                    <img src="./img/image.png" alt="send-pic" />
+                    <label htmlFor="file-upload">upload</label>
                     <input
                       type="file"
                       id="file-upload"
