@@ -23,6 +23,7 @@ const Card = ({ post }) => {
   const userData = useSelector((state) => state.getUsers.getUsers);
   const [file, setFile] = useState();
   const [upFile, setUpFile] = useState();
+  //isAllowed ici est une fonction qui vérifie le droit a la modification admin ou user
   const isAllowed =
     userData && (userData._id === post.posterId || userData.admin === true);
 

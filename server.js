@@ -5,6 +5,7 @@ const bodyParser = require("body-parser"); // body parsing   https://www.npmjs.c
 const cookieParser = require("cookie-parser"); // cookies parsing  https://www.npmjs.com/package/cookie-parser
 require("dotenv").config({ path: "./config/.env" }); // variable d'environnement  https://www.npmjs.com/package/dotenv
 require("./config/db");
+//MIDDLEWARE DE VERIFICATION AUTHENTIFICATION
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const app = express();
 const cors = require("cors");
@@ -25,8 +26,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//Token avec l'id utilisateur
+//Token avec l'id utilisateur //tout les get passe par checkUser qui vérifie l'id de l'utilisateur pour donner accès
 app.get("*", checkUser);
+// MIDDLEWARE pour l'authentification de l'utilisateur à la connexion
 app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._conditions._id);
 });

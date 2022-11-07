@@ -32,6 +32,7 @@ const UploadImg = () => {
       .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`)
       .then((res) => {
         dispatch(setUserData(res.data));
+        window.location.reload();
       });
   };
 

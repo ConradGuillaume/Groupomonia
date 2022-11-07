@@ -19,7 +19,7 @@ const validateMail = (email) => {
   return regexMail.test(email);
 };
 
-const maxAge = 3 * 24 * 60 * 1000;
+const maxAge = 1 * 24 * 60 * 60 * 1000; // 24h
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_TOKEN_SECRET, {
     expiresIn: maxAge,
@@ -88,7 +88,7 @@ exports.signIn = (req, res) => {
               });
             } else {
               const token = createToken(user._id);
-              res.cookie("jwt", token, { httpOnly: true, maxAge });
+              res.cookie("jwt", token, { httpOnly: true, maxAge }); //httponly true consultable uniquement par notre serveur
               res.status(200).json({ userId: user._id });
             }
           })

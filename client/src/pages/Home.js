@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useContext} from "react";
 import { UidContext } from "../components/AppContext";
 import NewPostForm from "../components/Posts/NewPostForm";
 import UserFriend from "../components/Profil/UserFriend";
@@ -19,7 +18,7 @@ const Home = () => {
             <UserFriend />
           </div>
         ) : (
-          <Navigate to="/profil" />
+          (window.location = "/profil")
         )}
       </div>
     )

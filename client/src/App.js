@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "./feature/user.slice";
 import { setAllPosts } from "./feature/Posts.slice";
 import { setUsers } from "./feature/users.slice";
-import { Navigate } from "react-router-dom";
+
 
 const App = () => {
   /* l'id utilisateur est placé dans un useContext pour être réutiliser par la suite  */
@@ -27,7 +27,6 @@ const App = () => {
         })
         .catch((err) => {
           console.log("no token");
-          <Navigate to="/profil" />;
         });
     };
     fetchToken();

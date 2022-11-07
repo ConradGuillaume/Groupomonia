@@ -5,7 +5,9 @@ module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, decodedToken) => {
+      //permet de Décoder le token et trouver l'id a l'intérieur
       if (err) {
+        //pas d'accès et kill du cookie
         res.locals.user = null;
         res.cookie("jwt", "", { maxAge: 1 });
         next();
